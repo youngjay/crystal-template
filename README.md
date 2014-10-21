@@ -19,6 +19,6 @@ module文件通常放在module目录下，使用html格式
 每个module的model和view会自动绑定
 
 ## 编码风格
-ajax notification dialog model等编码规范可以参考
+ajax notification dialog model等编码风格可以参考
 
 <http://code.dianpingoa.com/tp-tuangou-static/customer-visit>
