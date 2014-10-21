@@ -110,5 +110,6 @@ $(document).delegate('a', 'click', function(e) {
 });
 
 history.start({
+    // 当在静态服务器上模拟的时候，使用hash state
     pushState: !ENV.mock
 }); 
