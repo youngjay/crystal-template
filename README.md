@@ -4,15 +4,15 @@
 ![Crystal icon](http://i2.dpfile.com/ba/crystal.jpg)
 
 #目录
-- [基于](#基于)
-- [启动](#启动)
-- [目录结构](#目录结构)
+- [get start](#get start)
+- [project structure](#project structure)
+- [state](#state)
 - [module](#module)
   - [view](#view)
   - [model](#model)
-- [页面加载](#页面加载)
-- [布局](#布局)
-- [重定向](#重定向)
+- [page route](#page route)
+- [module layout](#module layout)
+- [redirect](#redirect)
 - [service](#service)
   - [ajax](#ajax)
   - [modal](#modal)
@@ -20,24 +20,16 @@
   - [validator](validator)
   - [validator-handlers](#validator-handlers)
 
-
-#基于
-- 数据绑定：[knockout]
-- 包管理：[browserify]
-- 模块编译：[crystal-modulify]
-- 路由：[crystal-page]
-- 应用状态：[crystal-state]
-
-#启动
+#get start
 - 安装node或者iojs
 - 安装gulp ``` npm install gulp -g ``` 
 - 下载[项目模版](https://github.com/youngjay/crystal-template/archive/master.zip)，以下操作都在改文件解压之后的目录里进行 
 - 安装nodejs依赖 ``` npm install ```
-- 启动编译 ``` gulp && gulp watch ```
-- 启动server，需要另开一个命令行窗口 ``` node server.js ```
+- get start编译 ``` gulp && gulp watch ```
+- get startserver，需要另开一个命令行窗口 ``` node server.js ```
 - 打开浏览器访问 ``` http://localhost:3000 ```，应该能在页面上看到``` hello world ```
 
-#目录结构
+#project structure
 
 ```
 |-- README.md                      
@@ -48,13 +40,16 @@
 |   `-- service          -- 各个组件需要用到的公用服务
 |-- dist/                -- 编译后的文件
 |-- gulpfile.js          -- gulp task
-|-- index.html           -- 启动页面      
+|-- index.html           -- get start页面      
 |-- node_modules/        -- 存放nodejs的库
 |-- package.json         -- nodejs 库的配置
 |-- server-config.js     -- 模拟的后台代码
-|-- server.js            -- 启动server的脚本
+|-- server.js            -- get startserver的脚本
 `-- vendor/              -- 非nodejs的库
 ```
+
+#app state
+使用[crystal-state]作为app全局状态
 
 #module
 module的编译是由crystal-
@@ -100,7 +95,9 @@ model可以是一个array（推荐），function，或者object。
 
 如果是数组的话，数组里面的function会被作为构造函数（可以多个，顺序执行）；object会被作为prototype；数组可以嵌套
 
-#页面加载
+#page route
+使用[crystal-page]作为module文件加载器
+
 当使用state.Location的时候访问 ```http://localhost:3000/a/b?c=1&d=2```
 
 或使用state.Hash的时候访问 ```http://localhost:3000/any/path/#/a/b?c=1&d=2```
@@ -122,8 +119,8 @@ model = [
 ]
 ```
 
-#布局
-在module每一层文件夹下面都一个添加一个``` __layout.html ```文件，该文件会作为对应目录的布局文件。
+#module layout
+在module每一层文件夹下面都一个添加一个``` __layout.html ```文件，该文件会作为对应目录的module layout文件。
 
 __layout文件内必须包含一个{{content}}
 ```html
@@ -133,7 +130,7 @@ __layout文件内必须包含一个{{content}}
 
 __layout.html可以嵌套在多个目录下
 
-#重定向
+#redirect
 在```app/app-config```中定义
 
 ``` js
@@ -148,11 +145,11 @@ module.exports = {
     }
 }
 ```
-当state发生变化的时候，crystal查找重定向配置，反复应用，直到最终。
+当state发生变化的时候，crystal查找redirect配置，反复应用，直到最终。
 
-如果当你配置上面那个重定向设置，并且访问 ```/``` 的时候
+如果当你配置上面那个redirect设置，并且访问 ```/``` 的时候
 
-页面会进行如下重定向操作
+页面会进行如下redirect操作
 / > /rotate > /rotate/territor > /rotate/territory/hierarchy
 
 #service
