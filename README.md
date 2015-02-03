@@ -104,13 +104,9 @@ model可以是一个array（推荐），function，或者object。
 
 crystal会加载 ``` app/module/a/b ``` 
 
-额外的，如果这个module有onStateChange，则这个方法会被调用，并且传入state.getData().query作为参数
-
+额外的，如果这个module有onStateChange，则这个方法会被调用，并且传入state.getData().query作为参数，例如
 ``` js
 model = [
-    function() {
-        // 这里是构造函数
-    },
     {
         onStateChange: function(query) {
             console.log(query);
