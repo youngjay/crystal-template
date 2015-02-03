@@ -3,6 +3,20 @@
 
 ![Crystal icon](http://i2.dpfile.com/ba/crystal.jpg)
 
+#目录
+- [基于](#基于)
+- [启动](#启动)
+- [目录结构](#目录结构)
+- [module](#module)
+- [view](#view)
+- [model](#model)
+- [页面加载](#页面加载)
+- [布局](#布局)
+- [重定向](#重定向)
+- [service](#service)
+  - [ajax](#ajax)
+
+
 #基于
 - 数据绑定：[knockout]
 - 包管理：[browserify]
@@ -36,10 +50,9 @@
 |-- server-config.js     -- 模拟的后台代码
 |-- server.js            -- 启动server的脚本
 `-- vendor/              -- 非nodejs的库
-
 ```
 
-#module文件
+#module
 module的编译是由crystal-
 module文件是一个html文件，可以包含一个script标签,例如
 
@@ -68,7 +81,9 @@ module文件是一个html文件，可以包含一个script标签,例如
 </script>
 ```
 module文件一般存放在app/module目录下
-module文件包含[view](#view) —— html内容，和view对应的[model](#model) —— script标签内容，必须给``` model ```对象赋值
+module文件包含
+- [view](#view) —— html内容
+- [model](#model) —— script标签内容
 
 #view
 view基于[knockout]的绑定语法，默认导入了[knockout.punches]的语法。knockout的配置可以看
@@ -103,6 +118,43 @@ model = [
 ]
 ```
 
+#布局
+在module每一层文件夹下面都一个添加一个``` __layout.html ```文件，该文件会作为对应目录的布局文件。
+
+__layout文件内必须包含一个{{content}}
+```html
+<main>{{content}}</main>
+```
+在生成module的时候，{{content}}将会被替换成该目录下module的view
+
+__layout.html可以嵌套在多个目录下
+
+#重定向
+在```app/app-config```中定义
+
+``` js
+module.exports = {
+    redirects: {
+        '/': '/rotate',
+
+        '/rotate': '/rotate/territory',
+        '/rotate/territory': '/rotate/territory/hierarchy',
+
+        '/rotate/team': '/rotate/team/list'
+    }
+}
+```
+当state发生变化的时候，crystal查找重定向配置，反复应用，直到最终。
+
+如果当你配置上面那个重定向设置，并且访问 ```/``` 的时候
+
+页面会进行如下重定向操作
+/ > /rotate > /rotate/territor > /rotate/territory/hierarchy
+
+#service
+
+##ajax
+1111
 
 [knockout]: http://www.knockoutjs.com/ 
 [browserify]: http://browserify.org/
