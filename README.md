@@ -8,13 +8,17 @@
 - [启动](#启动)
 - [目录结构](#目录结构)
 - [module](#module)
-- [view](#view)
-- [model](#model)
+  - [view](#view)
+  - [model](#model)
 - [页面加载](#页面加载)
 - [布局](#布局)
 - [重定向](#重定向)
 - [service](#service)
   - [ajax](#ajax)
+  - [modal](#modal)
+  - [notification](#notification)
+  - [validator](validator)
+  - [validator-handlers](#validator-handlers)
 
 
 #基于
@@ -85,11 +89,11 @@ module文件包含
 - [view](#view) —— html内容
 - [model](#model) —— script标签内容
 
-#view
+##view
 view基于[knockout]的绑定语法，默认导入了[knockout.punches]的语法。knockout的配置可以看
 ``` app/setup-knockout.js ```
 
-#model
+##model
 crystal会把model转化成一个[mixin-class]
 
 model可以是一个array（推荐），function，或者object。
@@ -154,7 +158,10 @@ module.exports = {
 #service
 
 ##ajax
-1111
+##modal
+##notification
+##validator
+##validator-handlers
 
 [knockout]: http://www.knockoutjs.com/ 
 [browserify]: http://browserify.org/
