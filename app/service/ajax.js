@@ -4,34 +4,30 @@ var _ = require('lodash');
 var BUSINESS_DATA_TYPE = 'json code-message';
 
 // mock url
-if (ENV.mock) {
-    $.ajaxPrefilter(BUSINESS_DATA_TYPE, function(options) {
-        options.url = 'mock-server/' + options.url + '.json';
-    });
-}
-else {
-    $.ajaxPrefilter(BUSINESS_DATA_TYPE, function(options) {
-        options.url = '/' + ENV.path + '/' + options.url;
-    });
-}
+// if (ENV.mock) {
+//     $.ajaxPrefilter(BUSINESS_DATA_TYPE, function(options) {
+//         options.url = 'mock-server/' + options.url + '.json';
+//     });
+// }
+// else {
+//     $.ajaxPrefilter(BUSINESS_DATA_TYPE, function(options) {
+//         options.url = '/' + ENV.path + '/' + options.url;
+//     });
+// }
+$.ajaxPrefilter(BUSINESS_DATA_TYPE, function(options) {
+    options.url = ENV.ajaxPrefix + options.url;
+});
 
 // evaluate data
 $.ajaxPrefilter(BUSINESS_DATA_TYPE, function(options) {
-    if (typeof options.data === 'string') {
+    var method = options.method ? options.method.toLowerCase() : 'get';
+    
+    if (typeof options.data === 'object' && (method === 'post' || method === 'put')) {
         options.contentType = 'application/json; charset=UTF-8';
+        options.data = JSON.stringify(options.data);
         return;
     }
 
-    if (typeof options.data === 'function') {
-        options.data = options.data.call(options.context);
-    }
-
-    // 若有嵌套对象，则用json序列化
-    _.forEach(options.data, function(value, key) {
-        if (typeof value === 'object') {
-            options.data[key] = JSON.stringify(value);
-        }
-    })
 
     if (options.data &&!(options.data instanceof FormData)) {
         options.data = $.param(options.data);
@@ -64,11 +60,18 @@ module.exports = function(options1) {
     
     // strip extra args
     var success = finalOptions.success;
+
     finalOptions.success = function(o) {
         success.call(this, o);
     };
 
-    return $.ajax(finalOptions);
+    if(ENV.mock){
+        setTimeout(function(){
+            $.ajax(finalOptions)
+        },200)
+    }else{
+        return $.ajax(finalOptions);
+    }
 };
 
 module.exports.error = function(jqXHR, statusText, error ) {

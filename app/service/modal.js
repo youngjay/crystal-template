@@ -4,8 +4,6 @@ var $ = require('jquery');
 var Modal = $.fn.modal.Constructor;
 var ko = require('knockout');
 
-var cache = {};
-
 var parseTemplate = function(html) {
     var fragments = ko.utils.parseHtmlFragment(html);
     for (var i = 0; i < fragments.length; i++) {
@@ -28,12 +26,12 @@ var addModalFunction = function(o) {
 
 // multiple modal support
 $(document).on({
-    'show.bs.modal': function () {
-        var zIndex = 1040 + (10 * $('.modal:visible').length);
+    'shown.bs.modal': function () {
+        var zIndex = 1030 + (10 * $('.modal:visible').length);
         $(this).css('z-index', zIndex);
-        setTimeout(function() {
-            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
-        }, 0);
+        // setTimeout(function() {
+        //     $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+        // }, 0);
     },
     'hidden.bs.modal': function() {
         if ($('.modal:visible').length > 0) {
@@ -46,29 +44,36 @@ $(document).on({
     }
 }, '.modal');
 
-        
+var instances = [];  
+var removeFromInstances = function(instance) {
+    var index = instances.indexOf(instance);
+    if (index !== -1) {
+        instances.splice(index, 1);
+    }
+}
 
 /*
 option params
 
-url: path to dialog
 confirm: callback when result confirmed
 cancel: callback when canceled
 complete: callback when complete
 
 */
 module.exports = function(options) {
-    var instance = cache[options.url];
+    var Class = options.target;
+    var instance = Class.instance;
 
     if (!instance) {
-        var Class = require('module/' + options.url);
         instance = new Class();
         addModalFunction(instance);
-        cache[options.url] = instance;
+        Class.instance = instance;
     }
 
-    instance.update(options.data, function(result) {
+    instance.onOpen(options.data, function(result) {
         this.__modal.hide();
+
+        removeFromInstances(this);
 
         var context = options.context;
 
@@ -86,7 +91,16 @@ module.exports = function(options) {
         if (options.complete) {
             options.complete.call(context);
         }
-    })
+    });
 
     instance.__modal.show();
+
+    instances.push(instance);
+};
+
+module.exports.closeAll = function() {
+    instances.forEach(function(instance) {
+        instance.__modal.hide();
+    });
+    instances.length = 0;
 };

@@ -1,115 +1,72 @@
 var _ = require('lodash');
 var ko = require('knockout');
-
-var buildTagRegExp = (function() {
-    var tRegExp = _.template('<<%= tag %>>([^<]*)<\\\/<%= tag %>>');
-
-    return function(tag) {
-        return new RegExp(tRegExp({tag: tag}), 'img');
-    };
-})()
-
-require('service/module-builder')
-    .addBuilder(
-        
-        // <module> replacer
-        // <module>'module/control/textbox', { value: dealGroupId, 'label': 'dealGroupId' }</module>
-        (function() {
-            var rModule = buildTagRegExp('module');
-            var tModule = _.template('<!-- ko module: require(\'service/module-builder\').getViewModel(<%= o %>) --><!-- /ko -->');
-
-            ko.bindingHandlers['module'] = {
-                'init': function(element, valueAccessor, ignored1, ignored2, bindingContext) {
-
-                    var componentViewModel = ko.utils.unwrapObservable(valueAccessor());    
-
-                    var template = componentViewModel['__view'];                
-
-                    ko.virtualElements.setDomNodeChildren(element, ko.utils.parseHtmlFragment(template));
-
-                    var childBindingContext = bindingContext['createChildContext'](componentViewModel);
-                    ko.applyBindingsToDescendants(childBindingContext, element);
-
-                    if (componentViewModel.afterRender) {
-                        componentViewModel.afterRender(ko.virtualElements.childNodes(element));
-                    }
-
-                    ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-                        if (componentViewModel.dispose) {
-                            componentViewModel.dispose();
-                        }
-                    });
-
-                    return { 'controlsDescendantBindings': true };
-                }
-            };
-
-            ko.virtualElements.allowedBindings['module'] = true;
-
-
-            return function(Class) {
-                var view = Class.prototype.__view;
-                if (view) {
-                    Class.prototype.__view = view.replace(rModule, function(m, m1) {
-                        return tModule({
-                            o: m1
-                        });
-                    })
-                }
-            }
-        })()
-    )
-
 require('./setup-knockout');
+var mixin = require('mixin-class');
 
-var history = require('backbone-history');
+// setup app
+var Page = require('crystal-page');
+var State = require('crystal-state');
+var App = require('service/app');
+var modal = require('service/modal');
 
-var PageController = require('page-controller').extend({
-    MODULE_CHILDREN_VIEW_PLACEHOLDER: '{{children}}'
-});
+var page = new Page();
+var state = new State.Location();
+var app = new App(state, page, require('./app-config'));
+window.app = app;
 
-var pc = new PageController(document.body);
+state.onChange(function() {
+    modal.closeAll();
+})
+// end
 
-var redirects = {
-};
 
-var applyRedirect = function(path) {
-    var redirectedPath = redirects[path];
-    if (redirectedPath) {
-        history.navigate(redirectedPath, {
-            replace: true,
-            trigger: true
-        });
-        return true;
+// gulpfile里面用到
+// 所有的module都会继承这个类，写在gulpfile里面
+var ViewModel = require('./vm');
+
+window.vm = function(mixins, html) {
+    var vm = ViewModel.extend(mixins);
+    if (html) {
+        vm.mix({
+            __view: html
+        })
     }
+    return vm;
 };
+// end
 
-pc.onDispatch = function(data) {
-    if (applyRedirect(data.path)) {
-        return true;
-    }
-};
-
-history.on('change', function(fragment) {   
-    pc.update(fragment);
-});
-
+// handle click by state
 var $ = require('jquery');
 
 $(document).delegate('a', 'click', function(e) {
-    var el = e.target;
-
-    if(el.hasAttribute('external')){
+    if(this.hasAttribute('external')){
        return;
     }
 
-    history.navigate(el.getAttribute('href', 2), {
-        trigger: true
-    })
+    if(!this.href){
+        return
+    }
+
+    state.setData(this.getAttribute('href', 2));
+
     return false;
 });
+// end
 
-history.start({
-    // 当在静态服务器上模拟的时候，使用hash state
-    pushState: !ENV.mock
-}); 
+// setup ajax error
+var ajax = require('service/ajax');
+var notification = require('service/notification');
+ajax.error = function(jqXHR, statusText, error ) {
+    notification.error(jqXHR.responseText || error, null, {
+        timeOut: 0
+    });
+};
+// end
+
+// start app
+app.start();
+
+
+
+
+

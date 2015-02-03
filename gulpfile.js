@@ -14,10 +14,11 @@ var ftp = require('gulp-ftp');
 var livereload = require('gulp-livereload');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var jshint = require('gulp-jshint');
+
 var DIST = 'dist/'
 var pkg = JSON.parse(fs.readFileSync('./package.json'));
 var COMMON_LIBS = pkg.dependencies;
-
 
 var PACKAGE_FOLDERS = ['service'];
 
@@ -83,17 +84,17 @@ gulp.task('build-jquery-vendors', function() {
     // b.add('./vendor/datepicker/js/bootstrap-datetimepicker.js');
     // b.add('./vendor/datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js');
     
-    // b.add('./vendor/jquery.ui/jquery.ui.core.js');
-    // b.add('./vendor/jquery.ui/jquery.ui.widget.js');
-    // b.add('./vendor/fileupload/jquery.fileupload.js');
+    b.add('./vendor/jquery.ui/jquery.ui.core.js');
+    b.add('./vendor/jquery.ui/jquery.ui.widget.js');
+    b.add('./vendor/fileupload/jquery.fileupload.js');
     // b.add('./vendor/jquery.ui/jquery.ui.mouse.js');
     // b.add('./vendor/jquery.ui/jquery.ui.draggable.js');
     // b.add('./vendor/jquery.ui/jquery.ui.sortable.js');
     // b.add('./vendor/transit/jquery.transit.js');
 
-    // b.require('./vendor/toastr/toastr.js', {
-    //     expose: 'toastr'
-    // });
+    b.require('./vendor/toastr/toastr.js', {
+        expose: 'toastr'
+    });
     // b.add('./vendor/typeahead.js/typeahead.bundle.js');
 
 
@@ -134,15 +135,16 @@ gulp.task('build-modules', function(cb) {
 
     b.transform(function(file) {
         return through(function(src, enc, callback) {
+            this.push('var model;\n')
             this.push(moduleify(src.toString(), {
                 stripWhitespace: true
             }));
             this.push('\n');
-            this.push('module.exports = require(\'service/module-builder\').build(module.exports, __html);')
+            this.push('module.exports=vm(model, __html)');
             callback();
         })
-    });
 
+    });
     return b.bundle()
         .pipe(source('modules.js'))
         .pipe(gulp.dest(DIST))

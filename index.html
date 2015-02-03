@@ -2,24 +2,24 @@
 <html>
     <head>
         <meta charset="utf8">
-        <link href="dist/vendor/bootstrap/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="dist/vendor/bootstrap/css/bootstrap-theme.min.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="dist/asset/index.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/dist/vendor/bootstrap/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/dist/vendor/bootstrap/css/bootstrap-theme.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/dist/vendor/toastr/toastr.css" media="all" rel="stylesheet" type="text/css" />
+
+        <link href="/dist/asset/index.css" media="all" rel="stylesheet" type="text/css" />
         <script>
-            // 用于服务端给前端传一些参数
             var ENV = {
-                // 是否在静态服务器上模拟
-                mock: true
-            }
+                ajaxPrefix: ''
+            };
         </script>
     </head>
     
     <body>
-        <script src="dist/node_modules.js"></script>
-        <script src="dist/jquery-vendors.js"></script>
-        <script src="dist/services.js"></script>
-        <script src="dist/modules.js"></script>
-        <script src="dist/index.js"></script>
+        <script src="/dist/node_modules.js"></script>
+        <script src="/dist/jquery-vendors.js"></script>
+        <script src="/dist/services.js"></script>
+        <script src="/dist/modules.js"></script>
+        <script src="/dist/index.js"></script>
     </body>
 </html>
 
