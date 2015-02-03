@@ -1,5 +1,6 @@
 #Crystal
 **Crystal** 是一个基于**组件**的快速开发前端框架
+
 ![Crystal icon](http://i2.dpfile.com/ba/crystal.jpg)
 
 
@@ -58,3 +59,19 @@ module文件是一个html文件，可以包含一个script标签,例如
     ]
 </script>
 ```
+
+- 也可以只含script
+```html
+<script>
+    model = [
+        
+    ]
+</script>
+```
+module文件一般存放在app/module目录下
+module文件包含[view](#view) —— html内容，和[model](#model) —— script标签内容，必须给``` model ```对象赋值
+
+#view
+view基于knockout的绑定语法，默认导入了[knockout.punches](http://mbest.github.io/knockout.punches/)的语法
+
+#model
