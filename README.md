@@ -4,20 +4,20 @@
 ![Crystal icon](http://i2.dpfile.com/ba/crystal.jpg)
 
 #目录
-- [get start](#get start)
-- [project structure](#project structure)
+- [get start](#get-start)
+- [project structure](#project-structure)
 - [state](#state)
 - [module](#module)
   - [view](#view)
   - [model](#model)
-- [page route](#page route)
-- [module layout](#module layout)
+- [page route](#page-route)
+- [module layout](#module-layout)
 - [redirect](#redirect)
 - [service](#service)
   - [ajax](#ajax)
   - [modal](#modal)
   - [notification](#notification)
-  - [validator](validator)
+  - [validator](#validator)
   - [validator-handlers](#validator-handlers)
 
 #get start
