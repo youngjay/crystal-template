@@ -14,7 +14,6 @@ var ftp = require('gulp-ftp');
 var livereload = require('gulp-livereload');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-var jshint = require('gulp-jshint');
 
 var DIST = 'dist/'
 var pkg = JSON.parse(fs.readFileSync('./package.json'));
