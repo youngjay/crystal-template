@@ -57,8 +57,7 @@
 ```
 
 #module
-module的编译是由crystal-
-module文件是一个html文件，可以包含一个script标签,例如
+module文件是一个html文件，例如
 
 - 只含html
 
@@ -85,9 +84,12 @@ module文件是一个html文件，可以包含一个script标签,例如
 </script>
 ```
 module文件一般存放在app/module目录下
+
 module文件包含
 - [view](#view) —— html内容
-- [model](#model) —— script标签内容
+- [model](#model) —— script标签中的model变量
+
+html文件由[crystal-modulify]编译成一个module class
 
 ##view
 view基于[knockout]的绑定语法，默认导入了[knockout.punches]的语法。knockout的配置可以查看
