@@ -21,7 +21,7 @@
 - [service](#service)
   - [notification](#notification)
 - [binding-handler](#binding-handler)
-  - [module](#bindinghandlermodule)
+  - [module](#module-1)
 
 #get start
 - 安装[node](http://nodejs.org/)或者[iojs](https://iojs.org/)
