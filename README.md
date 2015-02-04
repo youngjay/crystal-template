@@ -23,6 +23,7 @@
 - [binding-handler](#binding-handler)
   - [module](#module-1)
 - [mock-server&server-config](#mock-serverserver-config)
+- [deploy](#deploy)
 - [examples](#examples)
 
 #get start
@@ -33,6 +34,7 @@
 - get start编译 `gulp && gulp watch`
 - get startserver，需要另开一个命令行窗口 `node server.js`
 - 打开浏览器访问 [http://localhost:3000](http://localhost:3000)，应该能在页面上看到`hello world`
+- ***关于knockout绑定，请参考 [knockout docs](http://knockoutjs.com/documentation/introduction.html)***
 
 #project structure
 
@@ -257,6 +259,21 @@ server-config.js 里面包含一个map
 mock-server比较简单明了，缺点是不能模拟各种http状态和处理restful接口（比如/user/{id}/name）。
 
 而后者正是server-config.js所能做到的
+
+#deploy
+
+请先把`package.json`的name字段改成你自己的项目名称
+
+发布到到alpha环境
+``` bash
+gulp alpha
+```
+
+发布到beta环境
+``` bash
+gulp beta
+```
+
 
 #examples
 启动项目后访问 [http://localhost:3000/example](http://localhost:3000/example)
