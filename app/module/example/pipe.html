@@ -1,0 +1,19 @@
+<button data-bind="click: pipeAdd">0 + 1 + 1+ 1 = ?</button>
+<script>
+    model = {
+        add1: function(a, callback) {
+            callback(a + 1);
+        },
+        alertResult: function(a) {
+            alert(a);
+        },
+        pipeAdd: function() {
+            this.pipe([
+                this.add1,
+                this.add1,
+                this.add1,
+                this.alertResult
+            ], 0)
+        }
+    }
+</script>
