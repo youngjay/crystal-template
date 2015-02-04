@@ -14,14 +14,12 @@
     - [getData()](#setdata)
     - [modal(options)](#modaloptions)
     - [fetch(options)](#fetchoptions)
-    - [pipe(fn,args..)](#pipefnargs)
+    - [pipe(fns,args..)](#pipefnsargs)
 - [page route](#page-route)
 - [module layout](#module-layout)
 - [redirect](#redirect)
 - [service](#service)
   - [notification](#notification)
-  - [validator](#validator)
-  - [validator-handlers](#validator-handlers)
 
 #get start
 - 安装node或者iojs
@@ -110,14 +108,26 @@ data是一个object对象，setData会把data中value生成ko.observable()。
 
 ###modal(options)
 弹出对话框
-- options.target: Object, modal的class
-- options.confirm: Function, 当modal调用callback并且传入参数的时候被调用
-- options.cancel: Function, 当modal调用callback不传入任何参数的时候被调用
-- options.compelete:Function, 当modal调用callback的时候被调用
-请参考`app/service/modal`
+- options.target: `Object`, modal的class
+- options.confirm: `Function`, 当modal调用callback并且传入参数的时候被调用
+- options.cancel: `Function`, 当modal调用callback不传入任何参数的时候被调用
+- options.compelete: `Function`, 当modal调用callback的时候被调用
+
+请参考`app/service/modal.js`
 
 ###fetch(options)
-###pipe(fn,args..)
+发起ajax请求
+
+用jQuery的ajax实现
+
+请参考`app/service/ajax.js`
+
+
+###pipe(fns,args..)
+把多个异步方法串联起来
+
+- fns: `Array` 需要串联的异步方法
+- args..: `Array` 除了fns之外的剩余参数。 在调用fns的第一个方法传入的参数
 
 
 #page route
@@ -175,6 +185,54 @@ module.exports = {
 / > /rotate > /rotate/territor > /rotate/territory/hierarchy
 
 #service
+##notification
+弹出提示
+
+请参考[toastr]
+
+#binding-handler
+##module
+
+定义一个module
+```js
+
+    var FormGroup = require('module/control/form-group');
+    var TextBox = require('module/control/text-box');
+    
+    
+    this.modules = {
+        territoryName: new FormGroup({
+            content: new TextBox({
+                value: this.territoryName,
+                validator: this.validators.territoryName
+            }),
+            label: '战区名称',
+            required: true
+        }),
+    
+        parentTerritory: new FormGroup({
+            content: new (require('module/control/territory-typeahead'))({
+                value: this.parentTerritoryId,
+                text: this.parentTerritoryName,
+                validator: this.validators.parentTerritoryId
+            }),
+            label: '父战区',
+            required: true
+        })
+    }
+```
+
+在当前module插入一个module
+
+```html
+  <fieldset>
+      <legend>
+          基本信息
+      </legend>
+      <!-- ko module: modules.territoryName --><!-- /ko -->
+      <!-- ko module: modules.parentTerritory --><!-- /ko -->
+  </fieldset>
+```
 
 
 [knockout]: http://www.knockoutjs.com/ 
@@ -185,3 +243,4 @@ module.exports = {
 [knockout.punches]: http://mbest.github.io/knockout.punches/
 [knockout.mapping]: http://knockoutjs.com/documentation/plugins-mapping.html
 [mixin-class]: https://github.com/youngjay/mixin-class
+[toastr]: http://codeseven.github.io/toastr/demo.html
