@@ -23,7 +23,7 @@
   - [notification](#notification)
 - [binding-handler](#binding-handler)
   - [module](#module-1)
-- [mock-server&server-config](#mock-serverserver-config)
+- [mock-server&server-config.js](#mock-serverserver-configjs)
 - [deploy](#deploy)
 
 #get start
@@ -245,8 +245,8 @@ module.exports = {
   </fieldset>
 ```
 
-#mock-server&server-config
-mock-server目录 和 server-config都可以模拟数据
+#mock-server&server-config.js
+mock-server目录 和 server-config.js都可以模拟数据
 
 mock-server是一个文件夹，里面的目录结构对应后台的url路径加上`.json`后缀
 
@@ -258,11 +258,12 @@ server-config.js 里面包含一个map
   - value.method: get post put ...
   - value.status: 200 404 ..
 
-何时用mock-server何时用server-config
 
-mock-server比较简单明了，缺点是不能模拟各种http状态和处理restful接口（比如/user/{id}/name）。
+mock-server比较简单明了，缺点是不能模拟各种http状态和处理restful接口（比如/user/{id}/name）；
 
-而后者正是server-config.js所能做到的
+而后者正是server-config.js所能做到的。
+
+当url不能用静态文件路径表示的时候，请使用server-config.js，其它时候使用mock-server
 
 #deploy
 
