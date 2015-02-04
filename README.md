@@ -48,15 +48,15 @@
 |   |-- binding-handler  -- knockout的binding handlers
 |   |-- module           -- 存放组件，这是开发业务逻辑的主要目录
 |   `-- service          -- 各个组件需要用到的公用服务
-|-- dist/                -- 编译后的文件
+|-- dist                 -- 编译后的文件
 |-- gulpfile.js          -- gulp task
 |-- index.html           -- get start页面 
 |-- mock-server          -- 模拟后台返回的数据 
-|-- node_modules/        -- 存放nodejs的库
+|-- node_modules         -- 存放nodejs的库
 |-- package.json         -- nodejs 库的配置
 |-- server-config.js     -- 模拟后台返回的数据
 |-- server.js            -- get startserver的脚本
-`-- vendor/              -- 非nodejs的库
+`-- vendor               -- 非nodejs的库
 ```
 
 #module
