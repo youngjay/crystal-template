@@ -31,8 +31,8 @@
 - 安装gulp `npm install gulp -g`
 - checkout本项目，以下操作都在本项目目录里进行 
 - 安装nodejs依赖 `npm install`
-- get start编译 `gulp && gulp watch`
-- get startserver，需要另开一个命令行窗口 `node server.js`
+- 编译并监听 `gulp && gulp watch`
+- 启动server，需要另开一个命令行窗口 `node server.js`
 - 打开浏览器访问 [http://localhost:3000](http://localhost:3000)，应该能在页面上看到`hello world`
 - ***关于knockout绑定，请参考 [knockout docs](http://knockoutjs.com/documentation/introduction.html)***
 
