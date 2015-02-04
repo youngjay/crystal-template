@@ -6,7 +6,6 @@
 #目录
 - [get start](#get-start)
 - [project structure](#project-structure)
-- [state](#state)
 - [module](#module)
   - [view](#view)
   - [model](#model)
@@ -15,6 +14,7 @@
     - [modal(options)](#modaloptions)
     - [fetch(options)](#fetchoptions)
     - [pipe(fns,args..)](#pipefnsargs)
+- [state](#state)
 - [page route](#page-route)
 - [module layout](#module-layout)
 - [redirect](#redirect)
@@ -55,9 +55,6 @@
 |-- server.js            -- get startserver的脚本
 `-- vendor/              -- 非nodejs的库
 ```
-
-#app state
-使用[crystal-state]作为app全局状态
 
 #module
 module的编译是由crystal-
@@ -136,6 +133,8 @@ data是一个object对象，setData会把data中value生成ko.observable()。
 - fns: `Array` 需要串联的异步方法
 - args..: `Array` 除了fns之外的剩余参数。 在调用fns的第一个方法传入的参数
 
+#app state
+使用[crystal-state]作为app全局状态
 
 #page route
 使用[crystal-page]作为module文件加载器
