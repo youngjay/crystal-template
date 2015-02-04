@@ -10,6 +10,11 @@
 - [module](#module)
   - [view](#view)
   - [model](#model)
+    - [setData(data)](#setdatadata)
+    - [getData()](#setdata)
+    - [modal(options)](#modaloptions)
+    - [fetch(options)](#fetchoptions)
+    - [pipe(fn,args..)](#pipefnargs)
 - [page route](#page-route)
 - [module layout](#module-layout)
 - [redirect](#redirect)
@@ -22,12 +27,12 @@
 
 #get start
 - 安装node或者iojs
-- 安装gulp ``` npm install gulp -g ``` 
+- 安装gulp `npm install gulp -g`
 - 下载[项目模版](https://github.com/youngjay/crystal-template/archive/master.zip)，以下操作都在改文件解压之后的目录里进行 
-- 安装nodejs依赖 ``` npm install ```
-- get start编译 ``` gulp && gulp watch ```
-- get startserver，需要另开一个命令行窗口 ``` node server.js ```
-- 打开浏览器访问 ``` http://localhost:3000 ```，应该能在页面上看到``` hello world ```
+- 安装nodejs依赖 `npm install`
+- get start编译 `gulp && gulp watch`
+- get startserver，需要另开一个命令行窗口 `node server.js`
+- 打开浏览器访问 `http://localhost:3000`，应该能在页面上看到`hello world`
 
 #project structure
 
@@ -55,7 +60,7 @@
 module的编译是由crystal-
 module文件是一个html文件，可以包含一个script标签,例如
 
-- 只含有html
+- 只含html
 
 ```html
 <div>hello world</div>
@@ -94,6 +99,23 @@ crystal会把model转化成一个[mixin-class]
 model可以是一个array（推荐），function，或者object。
 
 如果是数组的话，数组里面的function会被作为构造函数（可以多个，顺序执行）；object会被作为prototype；数组可以嵌套
+
+在```app/vm.js```中定义了所有model的基类，它引入了以下方法：
+
+###setData(data)
+data是一个object对象，setData会把data中value生成ko.observable()。
+请参考[knockout.mapping]
+
+###getData()
+把ko.observable()对象转成普通对象
+请参考[knockout.mapping]
+
+###modal(options)
+
+
+###fetch(options)
+###pipe(fn,args..)
+
 
 #page route
 使用[crystal-page]作为module文件加载器
@@ -162,4 +184,5 @@ module.exports = {
 [crystal-page]: https://github.com/youngjay/crystal-page
 [crystal-state]: https://github.com/youngjay/crystal-state
 [knockout.punches]: http://mbest.github.io/knockout.punches/
+[knockout.mapping]: http://knockoutjs.com/documentation/plugins-mapping.html
 [mixin-class]: https://github.com/youngjay/mixin-class
