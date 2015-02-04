@@ -32,7 +32,7 @@
 - 安装nodejs依赖 `npm install`
 - get start编译 `gulp && gulp watch`
 - get startserver，需要另开一个命令行窗口 `node server.js`
-- 打开浏览器访问 `http://localhost:3000`，应该能在页面上看到`hello world`
+- 打开浏览器访问 [http://localhost:3000](http://localhost:3000)，应该能在页面上看到`hello world`
 
 #project structure
 
@@ -241,15 +241,16 @@ module.exports = {
 
 #mock-server&server-config
 mock-server目录 和 server-config都可以模拟数据
+
 mock-server是一个文件夹，里面的目录结构对应后台的url路径加上`.json`后缀
+
 server-config.js 里面包含一个map
 
-key是url
-
-value的参数如下：
-- value.response: 需要返回的结果
-- value.method: get post put ...
-- value.status: 200 404 ..
+- key是url
+- value的参数如下：
+  - value.response: 需要返回的结果
+  - value.method: get post put ...
+  - value.status: 200 404 ..
 
 何时用mock-server何时用server-config
 
@@ -258,7 +259,7 @@ mock-server比较简单明了，缺点是不能模拟各种http状态和处理re
 而后者正是server-config.js所能做到的
 
 #examples
-启动项目后访问 `http://localhost:3000/example`
+启动项目后访问 [http://localhost:3000/example](http://localhost:3000/example)
 
 
 [knockout]: http://www.knockoutjs.com/ 
