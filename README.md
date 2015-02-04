@@ -195,7 +195,7 @@ module.exports = {
 #binding-handler
 ##module
 
-定义一个module
+构造module
 ```js
 
     var FormGroup = require('module/control/form-group');
@@ -224,7 +224,7 @@ module.exports = {
     }
 ```
 
-在当前module插入一个module
+在当前module插入其它module
 
 ```html
   <fieldset>
