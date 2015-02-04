@@ -5,6 +5,7 @@
 
 #目录
 - [get start](#get-start)
+- [examples](#examples)
 - [project structure](#project-structure)
 - [module](#module)
   - [view](#view)
@@ -24,7 +25,6 @@
   - [module](#module-1)
 - [mock-server&server-config](#mock-serverserver-config)
 - [deploy](#deploy)
-- [examples](#examples)
 
 #get start
 - 安装[node](http://nodejs.org/)或者[iojs](https://iojs.org/)
@@ -35,6 +35,9 @@
 - get startserver，需要另开一个命令行窗口 `node server.js`
 - 打开浏览器访问 [http://localhost:3000](http://localhost:3000)，应该能在页面上看到`hello world`
 - ***关于knockout绑定，请参考 [knockout docs](http://knockoutjs.com/documentation/introduction.html)***
+
+#examples
+启动项目后访问 [http://localhost:3000/example](http://localhost:3000/example)
 
 #project structure
 
@@ -276,8 +279,6 @@ gulp beta
 ```
 
 
-#examples
-启动项目后访问 [http://localhost:3000/example](http://localhost:3000/example)
 
 
 [knockout]: http://www.knockoutjs.com/ 
