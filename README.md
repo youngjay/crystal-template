@@ -20,6 +20,8 @@
 - [redirect](#redirect)
 - [service](#service)
   - [notification](#notification)
+- [binding-handler](#binding-handler)
+  - [module](#bindinghandlermodule)
 
 #get start
 - 安装[node](http://nodejs.org/)或者[iojs](https://iojs.org/)
@@ -191,7 +193,7 @@ module.exports = {
 请参考[toastr]
 
 #binding-handler
-##module
+##module<a name="bindinghandlermodule"></a>
 
 定义一个module
 ```js
