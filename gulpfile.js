@@ -134,6 +134,7 @@ gulp.task('build-modules', function(cb) {
 
     b.transform(function(file) {
         return through(function(src, enc, callback) {
+            this.push('"use strict"\n');
             this.push('var model;\n')
             this.push(moduleify(src.toString(), {
                 stripWhitespace: true
