@@ -5,7 +5,9 @@ var _ = require('lodash');
 var pathUtil = require('path');
 var port = 3000;
 
-var ajaxPrefix = ''
+var ajaxPrefix = '';
+var mockServerPath = 'mock-server';
+
 var services = require('./server-config.js');
 _.forEach(services, function(config, path) {
     if (!config.status) {
@@ -22,24 +24,36 @@ app.get(ajaxPrefix + '/services', function(req, res) {
 
 var staticIndexPageContent = fs.readFileSync('./index.html');
 
+
 app.get('*', function(req, res) {
-    var path = '.' + req.url;
-
     res.status(200);
+    res.set('Access-Control-Allow-Origin', '*')
 
-    // static file
-    if (fs.existsSync(path) && fs.statSync(path).isFile()) {
-        var extname = pathUtil.extname(path);
-        if (extname) {
-            res.type(extname.substring(1));
+    var extname = pathUtil.extname(req.url);
+
+    // resource
+    if (extname) {
+        res.type(extname.substring(1));
+        var path = '.' + req.url;
+        if (fs.existsSync(path) && fs.statSync(path).isFile()) {
+            res.send(fs.readFileSync(path));
+        } else {
+            res.status(404).send(req.url + ' not found');
         }
-        // res.set('Access-Control-Allow-Origin', '*')
-        res.send(fs.readFileSync(path));
-    }
-    // index page 
+    } 
     else {
-        res.type('html');
-        res.send(staticIndexPageContent);
+        // mock server
+        var maybeResponseFile = './' + mockServerPath + req.url.replace(ajaxPrefix, '').replace(/\?.*/, '') + '.json';
+       
+        if (fs.existsSync(maybeResponseFile) && fs.statSync(maybeResponseFile).isFile()) {
+            res.type('json');
+            res.send(fs.readFileSync(maybeResponseFile));
+        }
+        // index page 
+        else {
+            res.type('html');
+            res.send(staticIndexPageContent);
+        }
     }
 });
 

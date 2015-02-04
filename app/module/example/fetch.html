@@ -1,0 +1,25 @@
+<button data-bind="click: fetchName">fetch name</button>
+<button data-bind="click: fetchSex">fetch sex</button>
+<script>
+    model = [
+        {
+            fetchName: function() {
+                this.fetch({
+                    url: '/example/name',
+                    success: function(o) {
+                        alert('My name is [' + o.name + ']')
+                    }
+                })
+            },
+
+            fetchSex: function() {
+                this.fetch({
+                    url: '/example/sex',
+                    success: function(o) {
+                        alert('My sex is [' + o.sex + ']')
+                    }
+                })
+            }
+        }
+    ]
+</script>
