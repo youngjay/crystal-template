@@ -19,8 +19,6 @@
 - [module layout](#module-layout)
 - [redirect](#redirect)
 - [service](#service)
-  - [ajax](#ajax)
-  - [modal](#modal)
   - [notification](#notification)
   - [validator](#validator)
   - [validator-handlers](#validator-handlers)
@@ -90,8 +88,8 @@ module文件包含
 - [model](#model) —— script标签内容
 
 ##view
-view基于[knockout]的绑定语法，默认导入了[knockout.punches]的语法。knockout的配置可以看
-``` app/setup-knockout.js ```
+view基于[knockout]的绑定语法，默认导入了[knockout.punches]的语法。knockout的配置可以查看
+`app/setup-knockout.js`
 
 ##model
 crystal会把model转化成一个[mixin-class]
@@ -100,7 +98,7 @@ model可以是一个array（推荐），function，或者object。
 
 如果是数组的话，数组里面的function会被作为构造函数（可以多个，顺序执行）；object会被作为prototype；数组可以嵌套
 
-在```app/vm.js```中定义了所有model的基类，它引入了以下方法：
+在`app/vm.js`中定义了所有model的基类，它引入了以下方法：
 
 ###setData(data)
 data是一个object对象，setData会把data中value生成ko.observable()。
@@ -111,7 +109,12 @@ data是一个object对象，setData会把data中value生成ko.observable()。
 请参考[knockout.mapping]
 
 ###modal(options)
-
+弹出对话框
+- options.target: Object, modal的class
+- options.confirm: Function, 当modal调用callback并且传入参数的时候被调用
+- options.cancel: Function, 当modal调用callback不传入任何参数的时候被调用
+- options.compelete:Function, 当modal调用callback的时候被调用
+请参考`app/service/modal`
 
 ###fetch(options)
 ###pipe(fn,args..)
@@ -120,11 +123,11 @@ data是一个object对象，setData会把data中value生成ko.observable()。
 #page route
 使用[crystal-page]作为module文件加载器
 
-当使用state.Location的时候访问 ```http://localhost:3000/a/b?c=1&d=2```
+当使用state.Location的时候访问 `http://localhost:3000/a/b?c=1&d=2`
 
-或使用state.Hash的时候访问 ```http://localhost:3000/any/path/#/a/b?c=1&d=2```
+或使用state.Hash的时候访问 `http://localhost:3000/any/path/#/a/b?c=1&d=2`
 
-crystal会加载 ``` app/module/a/b ``` 
+crystal会加载 `app/module/a/b` 
 
 额外的，如果这个module有onStateChange，则这个方法会被调用，并且传入state.getData().query作为参数，例如
 ``` js
@@ -138,9 +141,10 @@ model = [
 ```
 
 #module layout
-在module每一层文件夹下面都一个添加一个``` __layout.html ```文件，该文件会作为对应目录的module layout文件。
+在module每一层文件夹下面都一个添加一个`__layout.html`文件，该文件会作为对应目录的module layout文件。
 
-__layout文件内必须包含一个{{content}}
+__layout文件内必须包含一个`{{content}}`字符串
+
 ```html
 <main>{{content}}</main>
 ```
@@ -149,7 +153,7 @@ __layout文件内必须包含一个{{content}}
 __layout.html可以嵌套在多个目录下
 
 #redirect
-在```app/app-config```中定义
+在`app/app-config.js`中定义
 
 ``` js
 module.exports = {
@@ -165,18 +169,13 @@ module.exports = {
 ```
 当state发生变化的时候，crystal查找redirect配置，反复应用，直到最终。
 
-如果当你配置上面那个redirect设置，并且访问 ```/``` 的时候
+如果当你配置上面那个redirect设置，并且访问 `/` 的时候
 
 页面会进行如下redirect操作
 / > /rotate > /rotate/territor > /rotate/territory/hierarchy
 
 #service
 
-##ajax
-##modal
-##notification
-##validator
-##validator-handlers
 
 [knockout]: http://www.knockoutjs.com/ 
 [browserify]: http://browserify.org/
