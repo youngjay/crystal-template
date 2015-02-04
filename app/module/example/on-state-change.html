@@ -1,0 +1,26 @@
+<h1 data-bind="text: queryValue"></h1>
+<ul>
+    <li>
+        <a href="?a=1&b=2">?a=1&b=2</a>
+    </li>
+    <li>
+        <a href="?d=333&d=2">?d=333&d=2</a>
+    </li>
+    <li>
+        <a href="?d=0">?d=0</a>
+    </li>
+</ul>
+<script>
+var ko = require('knockout');
+
+model = [
+    function() {
+        this.queryValue = ko.observable();
+    },
+    {
+        onStateChange: function(query) {
+            this.queryValue(JSON.stringify(query))
+        }
+    }
+]
+</script>

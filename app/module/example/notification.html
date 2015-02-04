@@ -1,0 +1,16 @@
+<button data-bind="click: success">call success</button>
+<button data-bind="click: error">call error</button>
+<script>
+var notification = require('service/notification');
+
+model = {
+    success: function() {
+        notification.success('success')
+    },
+
+
+    error: function() {
+        notification.error('error')
+    }
+}
+</script>

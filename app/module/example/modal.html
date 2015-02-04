@@ -1,0 +1,23 @@
+<div>
+    <button data-bind="click: showModal">modal</button>
+</div>
+<script>
+    model = [
+        {
+            showModal: function() {
+                this.modal({
+                    target: require('./modal-confirm'),
+                    confirm: function(isOK) {
+                        alert('I am ' + (isOK ? 'OK' : 'not OK'));
+                    },
+                    cancel: function() {
+                        alert('I am not sure')
+                    },
+                    complete: function() {
+                        alert('Bye')
+                    }
+                })
+            }
+        }
+    ]
+</script>

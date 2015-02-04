@@ -1,0 +1,36 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bind="click: cancel" >×</button>
+                <h4>modal</h4>
+            </div>
+            <div class="modal-body">
+                Are you OK?
+            </div>
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-default" data-bind="click: notOK">No</button>
+                <button type="button" class="btn btn-primary" data-bind="click: confirm">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    model = {
+        onOpen: function(data, callback) {
+            this.callback = callback;
+        },
+
+        cancel: function() {
+            this.callback();
+        },
+
+        confirm: function() {
+            this.callback(true);
+        },
+
+        notOK: function() {
+            this.callback(false);
+        }
+    }
+</script>
