@@ -193,7 +193,7 @@ module.exports = {
 请参考[toastr]
 
 #binding-handler
-##module<a name="bindinghandlermodule"></a>
+##module
 
 定义一个module
 ```js
