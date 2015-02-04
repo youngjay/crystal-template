@@ -22,9 +22,9 @@
   - [notification](#notification)
 
 #get start
-- 安装node或者iojs
+- 安装[node](http://nodejs.org/)或者[iojs](https://iojs.org/)
 - 安装gulp `npm install gulp -g`
-- 下载[项目模版](https://github.com/youngjay/crystal-template/archive/master.zip)，以下操作都在改文件解压之后的目录里进行 
+- checkout本项目，以下操作都在本项目目录里进行 
 - 安装nodejs依赖 `npm install`
 - get start编译 `gulp && gulp watch`
 - get startserver，需要另开一个命令行窗口 `node server.js`
