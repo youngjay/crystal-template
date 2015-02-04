@@ -150,7 +150,7 @@ data是一个object对象，setData会把data中value生成ko.observable()。
 
 crystal会加载 `app/module/a/b` 
 
-额外的，如果这个module有onStateChange，则这个方法会被调用，并且传入state.getData().query作为参数，例如
+额外的，如果这个module有onStateChange方法，则这它会被调用，并且传入state.getData().query作为参数，例如
 ``` js
 model = [
     {
@@ -193,7 +193,7 @@ module.exports = {
 如果当你配置上面那个redirect设置，并且访问 `/` 的时候
 
 页面会进行如下redirect操作
-/ > /rotate > /rotate/territor > /rotate/territory/hierarchy
+`/`  ->  `/rotate`  ->  `/rotate/territor`  ->  `/rotate/territory/hierarchy`
 
 #service
 ##notification
