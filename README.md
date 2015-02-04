@@ -193,7 +193,7 @@ module.exports = {
 如果当你配置上面那个redirect设置，并且访问 `/` 的时候
 
 页面会进行如下redirect操作
-`/`  ->  `/rotate`  ->  `/rotate/territor`  ->  `/rotate/territory/hierarchy`
+`/`  ->  `/rotate`  ->  `/rotate/territory`  ->  `/rotate/territory/hierarchy`
 
 #service
 ##notification
