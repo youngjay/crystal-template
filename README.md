@@ -1,7 +1,13 @@
 #Crystal
-**Crystal** 是一个基于**组件**的快速开发前端框架
-
 ![Crystal icon](http://i2.dpfile.com/ba/crystal.jpg)
+
+
+**Crystal** 是一个基于**组件**的快速开发前端框架。
+- 使用[knockout]作为视图-数据绑定框架
+- 使用[crystal-state]作为全局状态控制器
+- 使用[crystal-page]作为router
+- 使用[browserify]作为模块管理器
+
 
 #目录
 - [get start](#get-start)
