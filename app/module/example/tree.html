@@ -1,0 +1,10 @@
+<!-- ko module: tree --><!-- /ko -->
+<script>
+model = [
+    function() {
+        this.tree = new (require('./tree/root'))();
+        this.tree.expand();
+        this.tree.load();
+    }
+]
+</script>

@@ -1,0 +1,64 @@
+<div class="node" data-bind="delegateEvent: {
+    click: {
+        '[data-action=expand]': function(node) {
+            node.expand();
+        },
+        '[data-action=collapse]': function(node) {
+            node.collapse();
+        }, 
+        '[data-action=toDelete]': function(node) {
+            node.remove();
+        },
+        '[data-action=toCreate]': function(node) {
+            node.create();
+        }
+    }
+}">
+    <div class="handle">
+        <!-- ko if: children().length -->
+        <i class="glyphicon glyphicon-plus" data-bind="visible: !__expand()" data-action="expand"></i>
+        <i class="glyphicon glyphicon-minus" data-bind="visible: __expand" data-action="collapse"></i>
+        <!-- /ko -->
+    </div>
+    <div>
+        <div class="item">
+            <div class="name" data-bind="text: territoryName"></div>
+            <div class="op">
+                <div class="editable" data-bind="click: expandAll">
+                    全部展开
+                </div>
+                <div class="seperator"></div>
+                <div class="editable" data-bind="click: collapseAll">
+                    全部折叠
+                </div>
+            </div>
+        </div>
+        <div class="children" data-bind="visible: __expand, foreach: children">
+            <!-- ko module: $data --><!-- /ko -->
+        </div>
+    </div>
+</div>
+<script>
+var Node = require('./biz-node');
+
+model = [
+    Node,
+    {
+        ChildNodeClass: Node,
+
+        load: function() {
+            this.pipe([
+                function(callback) {
+                    this.fetch({
+                        url: '/example/territory-tree',
+                        success: callback
+                    });
+                },                
+                function(data) {
+                    this.setData(data);
+                }
+            ])
+        }
+    }
+]
+</script>

@@ -1,0 +1,55 @@
+<div class="node">
+    <div class="handle">
+        <!-- ko if: children().length -->
+        <i class="glyphicon glyphicon-plus" data-bind="visible: !__expand()" data-action="expand"></i>
+        <i class="glyphicon glyphicon-minus" data-bind="visible: __expand" data-action="collapse"></i>
+        <!-- /ko -->
+    </div>
+    <div>
+        <div class="item">
+            <div data-bind="text: territoryName"></div>
+            <div class="op">
+                <div class="editable" data-action="toDelete">删除</div>
+                <div class="seperator"></div>
+                <div class="editable" data-action="toCreate">添加子战区</div>
+            </div>
+        </div>
+        <div class="children" data-bind="visible: __expand, foreach: children">
+            <!-- ko module: $data --><!-- /ko -->
+        </div>
+    </div>
+</div>
+<script>
+var Base = require('./node');
+var base = Base.prototype;
+
+model = [
+    Base,
+    {
+        DATA_CHILDREN_PROP: 'childrenList',
+
+        reset: function() {
+            base.reset.call(this);
+            this.setData({
+                id: null,
+                territoryName: null
+            });
+        },
+
+        create: function() {              
+            var nodeData = {
+                id: 0,
+                territoryName: 'new node'
+            }
+            this.children.push(this.createChildNode(nodeData));
+            this.expand();        
+        },
+
+        remove: function() {
+            if (confirm('你确认要删除[' + this.territoryName() + ']吗？')) {
+                this.parentNode.children.remove(this);
+            }
+        }
+    }
+]
+</script>

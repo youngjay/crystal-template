@@ -1,0 +1,89 @@
+<script>
+var kom = require('knockout.mapping');
+var _ = require('lodash');
+model = [
+    function() {
+        this.reset();
+    },
+    {
+        // 子节点的类
+        ChildNodeClass: null,
+
+        // setData时，数据里面的"children"对应的字段
+        DATA_CHILDREN_PROP: 'children',
+
+        reset: function() {
+            this.setData({
+                children: [],
+
+                __expand: false
+            });
+        },
+
+        setData: function(data) {
+            // DATA_CHILDREN_PROP 属性需要特别处理
+            var children = data[this.DATA_CHILDREN_PROP];
+
+            if (children) {
+                data.children = [];
+                delete data[this.DATA_CHILDREN_PROP];
+            }
+           
+            kom.fromJS(data, null, this);
+
+            if (children) {
+                this.children(children.map(this.createChildNode, this));
+
+                // restore
+                data[this.DATA_CHILDREN_PROP] = children;
+                delete data.children;
+            }
+        },
+
+        expand: function() {
+            this.__expand(true);
+        },
+
+        collapse: function() {
+            this.__expand(false);
+        },
+
+        expandAll: function() {
+            this.cascadeChildFirst(function(node) {
+                node.expand();
+            });
+        },
+
+        collapseAll: function() {
+            this.cascadeChildFirst(function(node) {
+                node.collapse();
+            })
+        },
+
+        createChildNode: function(data) {
+            var child = new (this.ChildNodeClass || this.constructor)();
+            child.parentNode = this;
+            child.setData(data);
+            return child;
+        },
+
+        cascadeParentFirst: function(fn) {
+            if (fn(this) === true) {
+                return true;
+            }
+            return this.children().some(function(child) {
+                return child.cascadeParentFirst(fn)
+            })
+        },
+
+        cascadeChildFirst: function(fn) {
+            if (this.children().some(function(child) {
+                return child.cascadeChildFirst(fn)
+            })) {
+                return true;
+            }
+            return fn(this);
+        }
+    }
+]
+</script>
