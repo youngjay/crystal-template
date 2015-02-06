@@ -1,0 +1,10 @@
+<!-- ko module: a --><!-- /ko -->
+<!-- ko module: b --><!-- /ko -->
+<script>
+    model = [
+        function() {
+            this.a = new (require('./a'))('nested module A');
+            this.b = new (require('./b'))('nested module B');
+        }
+    ]
+</script>

@@ -1,8 +1,13 @@
 <!-- ko module: tree --><!-- /ko -->
+
+<blockquote>
+  <p class="text-warning">样式需要引入tree.styl</p>
+</blockquote>
+
 <script>
 model = [
     function() {
-        this.tree = new (require('./tree/root'))();
+        this.tree = new (require('./root'))();
         this.tree.expand();
         this.tree.load();
     }

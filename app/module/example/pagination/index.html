@@ -1,0 +1,106 @@
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    战区名称
+                </th>
+                <th style="width: 25%">
+                    开始时间
+                </th>
+                <th style="width: 25%">
+                    结束时间
+                </th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: items">
+            <tr>
+                <td>
+                   {{territoryName}}                    
+                </td>
+                <td>
+                    {{startTime}}
+                </td>
+                <td>
+                    {{endTime}}
+                </td>
+                <td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <!-- ko module: pagination --><!-- /ko -->
+    </div>
+</div>
+
+<blockquote>
+  <p class="text-warning">样式需要引入pagination.styl</p>
+</blockquote>
+
+<script>
+    var kom = require('knockout.mapping');
+    var _ = require('lodash');
+
+    model = [
+        function () {
+            this.setData({
+                items: [],
+                total: 0
+            })
+
+            this.resetQuery();
+
+            // 确保传入的是数字
+            this.inputPageIndex = this.pageIndex.extend({
+                ensureNumber: true
+            });
+
+            // 确保传入的是数字
+            this.inputPageSize = this.pageSize.extend({
+                ensureNumber: true
+            });
+
+            // module
+            this.pagination = new (require('./pagination'))({
+                size: this.pageSize, 
+                index: this.pageIndex, 
+                total: this.total, 
+                onChange: this.updateList.bind(this)
+            });
+        },
+        {
+            resetQuery: function() {
+                this.setData({
+                    pageIndex: 1,
+                    pageSize: 10
+                })
+            },
+
+            onStateChange: function (query) {
+                this.inputPageIndex(query.pageIndex || 1)
+                this.inputPageSize(query.pageSize || 10)
+
+                this.fetch({
+                    url: '/example/history-list',
+                    data: {
+                        pageSize: this.pageSize(),
+                        pageIndex: this.pageIndex()
+                    },
+                    success: function (data) {
+                        this.setData(data)
+                    }
+                });
+            },
+
+            updateList: function() {
+                app.state.setData({
+                    path: app.state.getData().path,
+                    query: {
+                        pageSize: this.pageSize(),
+                        pageIndex: this.pageIndex()                        
+                    }
+                })
+            }
+        }
+    ]
+</script>
