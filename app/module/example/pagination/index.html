@@ -48,18 +48,11 @@
                 total: 0
             })
 
-            this.resetQuery();
-
-            // 确保传入的是数字
-            this.inputPageIndex = this.pageIndex.extend({
-                ensureNumber: true
-            });
-
-            // 确保传入的是数字
-            this.inputPageSize = this.pageSize.extend({
-                ensureNumber: true
-            });
-
+            this.setData({
+                pageIndex: 1,
+                pageSize: 10
+            })；
+ 
             // module
             this.pagination = new (require('./pagination'))({
                 size: this.pageSize, 
@@ -69,16 +62,9 @@
             });
         },
         {
-            resetQuery: function() {
-                this.setData({
-                    pageIndex: 1,
-                    pageSize: 10
-                })
-            },
-
             onStateChange: function (query) {
-                this.inputPageIndex(query.pageIndex || 1)
-                this.inputPageSize(query.pageSize || 10)
+                this.pageIndex(parseInt(query.pageIndex) || 1)
+                this.pageSize(parseInt(query.pageSize) || 10)
 
                 this.fetch({
                     url: '/example/history-list',
