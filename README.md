@@ -39,7 +39,7 @@
 - 安装nodejs依赖 `npm install`
 - 编译并监听 `gulp && gulp watch`
 - 启动server，需要另开一个命令行窗口 `node server.js`
-- 打开浏览器访问 [http://localhost:3000](http://localhost:3000)，应该能在页面上看到`hello world`
+- 打开浏览器访问 [http://localhost:3000](http://localhost:3000)
 - ***关于knockout绑定，请参考 [knockout docs](http://knockoutjs.com/documentation/introduction.html)***
 
 #examples

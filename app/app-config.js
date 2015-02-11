@@ -1,6 +1,6 @@
 module.exports = {
     redirects: {
-        '/': '/hello/world',
+        '/': '/example',
 
         '/example': '/example/index'
     },
