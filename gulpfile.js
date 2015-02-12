@@ -94,7 +94,7 @@ gulp.task('build-jquery-vendors', function() {
     b.require('./vendor/toastr/toastr.js', {
         expose: 'toastr'
     });
-    // b.add('./vendor/typeahead.js/typeahead.bundle.js');
+    b.add('./vendor/typeahead.js/typeahead.bundle.js');
 
 
     return b.bundle()

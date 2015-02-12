@@ -1,0 +1,53 @@
+
+<div>
+    <div>
+        typeahead
+    </div>
+    <div>
+        <!-- ko module: typeahead --><!-- /ko -->
+    </div>
+    <div>
+        typeahead selected value is [<span data-bind="text: typeaheadValue"></span>]
+    </div>
+</div>
+<div>
+    <div>
+        typeahead的项（以换行分割）
+    </div>
+    <textarea rows="10" class="form-control" data-bind="value: itemsText"></textarea>
+</div>
+<script>
+    var AbstractTypeahead = require('./abstract-typeahead');
+    var ko = require('knockout');
+
+    model = [
+        function() {
+            this.setData({
+                itemsText: 'hello\nworld\nTom',
+
+                typeaheadText: null,
+                typeaheadValue: null,
+            });
+
+            var items = ko.pureComputed(function() {
+                return this.itemsText().split(/\n+/).map(function(word, i) {
+                    return {
+                        text: word,
+                        value: i
+                    }
+                });
+            }, this);
+
+            this.typeahead = new AbstractTypeahead({
+                text: this.typeaheadText,
+                value: this.typeaheadValue
+            });
+
+            this.typeahead.source = function(key, callback) {
+                callback(items().filter(function(word) {
+                    return word.text.indexOf(key) !== -1
+                }));
+            }
+        }
+    ]
+</script>

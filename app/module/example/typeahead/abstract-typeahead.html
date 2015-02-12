@@ -1,0 +1,102 @@
+<input type="text" class="form-control" data-bind="event: event"/>
+<script>
+var _ = require('lodash');
+var ko = require('knockout');
+
+var unwrapObservable = ko.utils.unwrapObservable;
+var typeaheadKey = "ttTypeahead";
+var $ = require('jquery');
+
+
+model = [
+    function(o) {
+        _.extend(this, o);
+
+        if (!ko.isObservable(this.text)) {
+            throw new Error('typeahead [text] prop must be assigned')
+        }
+
+        if (!ko.isObservable(this.value)) {
+            throw new Error('typeahead [value] prop must be assigned')
+        }
+
+        this.event = {};
+        var self = this;
+        if (this.validator) {
+            this.event.blur = function() {
+                setTimeout(function() {
+                    self.validator.validate();
+                }, 200);                
+            };
+        }
+    },
+    {
+        placeholder: '',
+        displayKey: 'text',
+        strict: true,
+
+
+        /**
+            keyword: typeahead当前的文字
+            callback： function 返回结果集
+            calback([
+                {
+                    text: 'Jay',
+                    value: 1
+                },
+                {
+                    text: 'Tom',
+                    value: 2
+                }
+            ])
+
+        */
+        source: function(keyword, callback) {
+            throw new Error('not implement')
+        },
+
+        afterRender: function(element) {
+            var self = this;
+            var $element = $(element);
+
+            $element.typeahead({
+                hint: true,
+                highlight: true,
+                autoselect: true,
+                minLength: 0
+            },
+            {
+                displayKey: this.displayKey,
+                source: this.source.bind(this)
+            });
+            // 单向绑定
+            ko.computed(function() {
+                $element.typeahead('val', self.text());
+            });   
+
+            this.onSelect($element);
+            
+            if (this.strict) {
+                $element.bind('blur', function() {
+                    if ($element.val().length) {
+                        $element.val(self.text());
+                    }
+                    // clear selection
+                    else {
+                        self.value(null);
+                        self.text(null);
+                    }                
+                });
+            }              
+        },
+
+        onSelect:function($element){
+            var self = this;
+            $element.bind('typeahead:selected', function(e, item) {
+                self.value(item.value);
+                self.text(item.text)
+            })
+        }
+    }
+]
+</script>

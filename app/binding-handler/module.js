@@ -23,6 +23,7 @@ module.exports = {
             }
         });
 
+
         return { 'controlsDescendantBindings': true };
     },
 
