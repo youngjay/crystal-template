@@ -36,7 +36,6 @@
 <blockquote>
   <p class="text-warning">样式需要引入pagination.styl</p>
 </blockquote>
-
 <script>
     var kom = require('knockout.mapping');
     var _ = require('lodash');
@@ -46,18 +45,18 @@
             this.setData({
                 items: [],
                 total: 0
-            })
+            });
 
             this.setData({
                 pageIndex: 1,
                 pageSize: 10
-            })；
+            });
  
             // module
             this.pagination = new (require('./pagination'))({
-                size: this.pageSize, 
-                index: this.pageIndex, 
-                total: this.total, 
+                size: this.pageSize,
+                index: this.pageIndex,
+                total: this.total,
                 onChange: this.updateList.bind(this)
             });
         },
