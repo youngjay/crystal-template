@@ -25,7 +25,7 @@ app.get(ajaxPrefix + '/services', function(req, res) {
 var staticIndexPageContent = fs.readFileSync('./index.html');
 
 
-app.get('*', function(req, res) {
+app.all('*', function(req, res) {
     res.status(200);
     res.set('Access-Control-Allow-Origin', '*')
 

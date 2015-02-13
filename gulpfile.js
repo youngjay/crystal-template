@@ -1,4 +1,4 @@
-var _browserify = require('browserify');
+var _browserify = require('browserify-windows-fix');
 var fs = require('fs');
 var _ = require('lodash');
 var gulp = require('gulp');
