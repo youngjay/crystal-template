@@ -30,7 +30,6 @@
 - [binding-handler](#binding-handler)
   - [module](#module-1)
 - [mock-server&server-config.js](#mock-serverserver-configjs)
-- [deploy](#deploy)
 
 #get start
 - 安装[node](http://nodejs.org/)或者[iojs](https://iojs.org/)
@@ -270,21 +269,6 @@ mock-server比较简单明了，缺点是不能模拟各种http状态和处理re
 而后者正是server-config.js所能做到的。
 
 当url不能用静态文件路径表示的时候，请使用server-config.js，其它时候使用mock-server
-
-#deploy
-
-请先把`package.json`的name字段改成你自己的项目名称
-
-发布到到alpha环境
-``` bash
-gulp alpha
-```
-
-发布到beta环境
-``` bash
-gulp beta
-```
-
 
 
 

@@ -10,7 +10,6 @@ var glob = require('glob');
 var moduleify = require('crystal-modulify');
 var path = require('path');
 var source = require('vinyl-source-stream');
-var ftp = require('gulp-ftp');
 var livereload = require('gulp-livereload');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -188,27 +187,6 @@ gulp.task('copy-vendor-to-dist', function() {
         .pipe(gulp.dest(DIST + 'vendor'))
 });
 
-gulp.task('alpha', function() {
-    return gulp.src(DIST + '**/*.*')
-        .pipe(ftp({
-            host: '192.168.8.174',
-            port: 21,
-            user: 'e2f',
-            pass: '654321',
-            remotePath: 'biz-static/' + pkg.name
-        }))
-});
-
-gulp.task('beta', function() {
-    return gulp.src(DIST + '**/*.*')
-        .pipe(ftp({
-            host: '10.1.2.121',
-            port: 21,
-            user: 'ba',
-            pass: 'eNRicXp3i2M6EAQYBFrQfND7G',
-            remotePath: pkg.name + '/' + increaseVersion()
-        }))
-});
 
 var stylus = require('gulp-stylus');
 gulp.task('stylus', function() {
