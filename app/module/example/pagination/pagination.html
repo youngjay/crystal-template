@@ -65,6 +65,8 @@
         e.preventDefault();
     };
 
+    var FIRST_INDEX = 1;
+
     model = [
         function (options) {
             _.assign(this, options);
@@ -108,41 +110,52 @@
                 throw new Error('to be implemented')
             },
 
-            tryChangeIndex: function (index, e) {
-                if (!$(e.target.parentNode).hasClass('active')) {
-                    this.index(index);
-                    this.onChange();
+            changeIndex: function(index) {
+                this.index(index);
+                this.onChange();
+            },
+
+            isAtFirst: function() {
+                return this.index() === 1;
+            },
+
+            isAtLast: function() {
+                return this.index() === this.pageCount();
+            },
+
+            prev: function () {
+                if (!this.isAtFirst()) {
+                    this.changeIndex(this.index() - 1);
                 }
             },
 
-            prev: function (data, e) {
-                stop(e);
-                this.tryChangeIndex(this.index() - 1, e);
+            first: function () {
+                if (!this.isAtFirst()) {
+                    this.changeIndex(FIRST_INDEX);
+                }
             },
 
-            next: function (data, e) {
-                stop(e);
-                this.tryChangeIndex(this.index() + 1, e);
+            next: function () {
+                if (!this.isAtLast()) {
+                    this.changeIndex(this.index() + 1);
+                }
             },
 
-            first: function (data, e) {
-                stop(e);
-                this.tryChangeIndex(1, e);
+            last: function () {
+                if (!this.isAtLast()) {
+                    this.changeIndex(this.pageCount());
+                }                
             },
 
-            last: function (data, e) {
-                stop(e);
-                this.tryChangeIndex(this.pageCount(), e);
-            },
-
-            handleIndexClick: function (index, e) {
-                stop(e);
-                this.tryChangeIndex(index, e);
+            handleIndexClick: function (index) {
+                if (index !== this.index()) {
+                    this.changeIndex(index);
+                }
             },
 
             handleSizeChange: function() {
-                 this.index(1);
-                 this.onChange();
+                this.index(1);
+                this.onChange();
             }
         }
     ]
