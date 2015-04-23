@@ -27,7 +27,6 @@
     };
 
     var highlightActiveNavs = function(children, path) {
-   
         children.forEach(function(child) {
             if (isPathInclude(path, child.path)) {
                 child.active = true;
@@ -43,9 +42,10 @@
     };
 
     model = mixin(
-        function(navs) {
+        function(navs, __path) {
+
             this.navs = _.cloneDeep(navs);
-            highlightActiveNavs(this.navs, '/' + this.__path);
+            highlightActiveNavs(this.navs, '/' + __path);
         }
     )
 </script>

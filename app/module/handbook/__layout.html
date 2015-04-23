@@ -8,12 +8,12 @@
 </div>
 
 <script>
-    var Layout = require('module/control/layout');
+    var LSideBar = require('module/control/left-sidebar');
     var mixin = require('mixin-class');
 
     model = mixin(
         function() {
-        	this.handbook = new Layout(app.config.navs);
+        	this.handbook = new LSideBar(app.config.navs.handbook, this.__path);
         }
     )
 </script>

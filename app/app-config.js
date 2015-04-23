@@ -4,7 +4,9 @@ module.exports = {
         '/handbook': '/handbook/index',
         '/example': '/example/index'
     },
-    navs: [
+    navs: {
+        example:[],
+        handbook: [
             {
                 text: '简介',
                 path: '/handbook/instruction',
@@ -79,4 +81,5 @@ module.exports = {
             }
 
         ]
+    }
 }
