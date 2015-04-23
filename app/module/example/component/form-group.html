@@ -1,0 +1,42 @@
+<!-- ko module: modules.name --><!-- /ko -->
+<script>
+    var FormGroup = require('module/control/form-group');
+	var textBox = require("module/control/text-box");
+
+    var Validator = require('service/validator');
+    var v = require('service/validate-handlers');
+
+	model = [
+		function(){
+			this.reset();
+			this.buildValidator();
+			this.buildModule();
+		},
+		{
+			reset: function(){
+				this.setData({
+					myName: "张涛"
+					}
+				);
+			},
+			buildValidator: function(){
+                this.validators = {
+                    myName: new Validator(this.myName, [v.required])
+                };
+			},
+			buildModule: function(){
+				this.modules = {
+					name: new FormGroup({
+						content: new textBox({
+							value: this.myName,
+	                        validator: this.validators.myName
+						}),
+						label: "姓名",
+                        cols: [1, 4],
+                        required: true
+					})
+				}
+			}
+		}
+	];
+</script>

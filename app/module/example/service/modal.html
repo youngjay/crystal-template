@@ -1,0 +1,49 @@
+<div class="docs-section">
+    <h2>弹出框</h2>
+    <p>我们基于bootstrap的modal对话框，来自定义我们的弹出框</p>
+    <h3>实例</h3>
+    <div><button data-bind="click: showModal">modal</button></div>
+</div>
+<div class="docs-section">
+    <h3>实现</h3>
+    <pre>
+        <code>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-bind="click: cancel" >×</button>
+                        <h4>modal</h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you OK?
+                    </div>
+                    <div class="modal-footer" >
+                        <button type="button" class="btn btn-default" data-bind="click: notOK">No</button>
+                        <button type="button" class="btn btn-primary" data-bind="click: confirm">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </code>
+    </pre>
+</div>
+
+<script>
+    model = [
+        {
+            showModal: function() {
+                this.modal({
+                    target: require('module/example/modal/modal-confirm'),
+                    confirm: function(isOK) {
+                        alert('I am ' + (isOK ? 'OK' : 'not OK'));
+                    },
+                    cancel: function() {
+                        alert('I am not sure')
+                    },
+                    complete: function() {
+                        alert('Bye')
+                    }
+                })
+            }
+        }
+    ]
+</script>

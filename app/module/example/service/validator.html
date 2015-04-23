@@ -1,0 +1,47 @@
+<!-- ko module: modules.name --><!-- /ko -->
+<script>
+    var FormGroup = require('module/control/form-group');
+	var textBox = require("module/control/text-box");
+	var ko = require("knockout");
+
+    var Validator = require('service/validator');
+    var v = require('service/validate-handlers');
+
+	model = [
+		function(){
+			this.reset();
+			this.buildValidator();
+			this.buildModule();
+		},
+		{
+			reset: function(){
+				this.setData({
+					myName: null
+					}
+				);
+			},
+			buildValidator: function(){
+                this.validators = {
+                    myName: new Validator(this.myName, [v.required, v.lengthEqual(3), function(value){
+                    	if(!(value.indexOf("张") > -1)){
+                    		return "姓名必须含有张"
+                    	}
+                    }])
+                };
+			},
+			buildModule: function(){
+				this.modules = {
+					name: new FormGroup({
+						content: new textBox({
+							value: this.myName,
+	                        validator: this.validators.myName
+						}),
+						label: "姓名",
+                        cols: [1, 4],
+                        required: true
+					})
+				}
+			}
+		}
+	];
+</script>

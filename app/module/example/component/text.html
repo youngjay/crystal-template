@@ -1,0 +1,14 @@
+<!-- ko module: text --><!-- /ko -->
+
+<script>
+	var text = require("module/control/static");
+	var ko = require("knockout");
+	model = [
+		function(){
+			this.dealName = ko.observable("我是团单"); //this.dealName = "我是团单"
+			this.text = new text({
+				text: this.dealName
+			});
+		}
+	];
+</script>

@@ -1,0 +1,41 @@
+	<div class="btn-group" data-bind="foreach: msgs">
+		<button class="btn btn-{{name}}" data-bind="text: name, click: $parent.msgTip"></button>
+	</div>
+<script>
+	var notification = require("service/notification");
+	model = [
+		function(){
+			this.reset();
+		},
+		{
+			reset: function(){
+				this.setData({
+					msgs: [{
+						name: "info",
+						method: "info",
+						msg: "info提示内容"
+					}, {
+						name: "success",
+						method: "success",
+						msg: "success提示内容"
+					}, {
+						name: "warning",
+						method: "warning",
+						msg: "warning提示内容"
+					}, {
+						name: "danger",
+						method: "error",
+						msg: "error提示内容"
+					},{
+						name: "clear",
+						method: "clear",
+						msg: null
+					}]
+				});
+			},
+			msgTip: function($data){
+				notification[$data.method()]($data.msg(), "信息提示");
+			}
+		}
+	];
+</script>
