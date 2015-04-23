@@ -1,0 +1,41 @@
+<div class="form-group" data-bind="css: { required: required }">
+    <label data-bind="text: label, css: labelCSS">
+    </label>
+    <div data-bind="css: controlCSS">
+        <!-- ko module: content --><!-- /ko -->
+        <span class="help-block" data-bind="visible: !validator.isValid(), text: validator.errorMsgs().join('; ')"></span>
+    </div>
+</div>
+<script>
+    var _ = require('lodash');
+    var Validator = require('service/validator');
+    var ko = require('knockout');
+
+    model = [
+        require('./simple-form-group'),
+        function(o) {
+            
+            if (this.content.validator) {
+                this.validator = this.content.validator;
+            }
+
+            this.labelCol = this.cols[0];
+            this.controlCol = this.cols[1];
+
+            this.labelCSS = 'control-label col-sm-' + this.labelCol;
+            this.controlCSS = ko.pureComputed(function() {
+                var css = 'col-sm-' + this.controlCol;
+                if (!this.validator.isValid()) {
+                    css += ' has-error'
+                }
+                return css;
+            }, this)
+        },
+        {
+            required: false,
+            cols: [3, 7],
+            validator: Validator.api
+        }
+    ];
+
+</script>

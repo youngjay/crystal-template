@@ -1,0 +1,118 @@
+<div class="docs-section">
+	<h3>通知/notification</h3>	
+	<p>常用于信息提示（info）、成功提示（success）、警告提示（warning）、失败提示（error）</p>
+	<h3>实例</h3>
+	<div class="btn-group" data-bind="foreach: msgs">
+		<button class="btn btn-{{name}}" data-bind="text: name, click: $parent.msgTip"></button>
+	</div>
+</div>
+<div class="docs-section">
+	<h3>使用方法</h3>
+	<pre>
+ 		<code>
+ 				//引入通知库
+  				var notification = require("service/notification");
+
+  				//调用对应通知方式 info、success、warning、error
+  				notification.success("success提示内容", "信息提示");
+ 		</code>
+	</pre>
+</div>
+<div class="docs-section">
+	<h3>相关接口</h3>
+	<table class="table table-bordered table-hover">
+	    <tbody><tr>
+	        <th>名称</th>
+	        <th>类型</th>
+	        <th>入参</th>
+	        <th>描述</th>
+	    </tr>
+	    <tr>
+	        <td>success<code>/</code>info<code>/</code>warning<code>/</code>error</td>
+	        <td>函数</td>
+	        <td>message、title、options</td>
+	        <td>展现不同类型信息提示</td>
+	    </tr>
+	    <tr>
+	 		<td>clear</td>
+	 		<td>函数</td>
+	 		<td>无</td>
+	 		<td>清除当前信息提示</td>
+	    </tr>
+		</tbody>
+	</table>
+</div>
+<div class="docs-section">
+	<h3>信息提示接口入参</h3>
+	<code>success/error/info/warning(message, title, options)</code>
+	<table class="table table-bordered table-hover">
+	    <tbody><tr>
+	        <th>名称</th>
+	        <th>类型</th>
+	        <th>默认值</th>
+	        <th>描述</th>
+	    </tr>
+	    <tr>
+	        <td>message</td>
+	        <td>字符串</td>
+	        <td>无</td>
+	        <td>提示的信息内容</td>
+	    </tr>
+	    <tr>
+	 		<td>title</td>
+	 		<td>字符串</td>
+	 		<td>无</td>
+	 		<td>提示的标题</td>
+	    </tr>
+	    <tr>
+	 		<td>options</td>
+	 		<td>object</td>
+			<td>内容较多，不一一列举，大致是一些动画效果，参考toastr</td>
+	 		<td>相关配置信息</td>
+	    </tr>
+		</tbody>
+	</table>
+</div>
+<div>
+    <h3>项目example</h3>
+	<p><a href="/example/service/notification">测试</a></p>
+	<p>实例代码位置：<code>example/service/notification.html</code></p>
+</div>
+<script>
+	var notification = require("service/notification");
+	model = [
+		function(){
+			this.reset();
+		},
+		{
+			reset: function(){
+				this.setData({
+					msgs: [{
+						name: "info",
+						method: "info",
+						msg: "info提示内容"
+					}, {
+						name: "success",
+						method: "success",
+						msg: "success提示内容"
+					}, {
+						name: "warning",
+						method: "warning",
+						msg: "warning提示内容"
+					}, {
+						name: "danger",
+						method: "error",
+						msg: "error提示内容"
+					},{
+						name: "clear",
+						method: "clear",
+						msg: null
+					}]
+				});
+			},
+			msgTip: function($data){
+				notification[$data.method()]($data.msg(), "信息提示");
+			}
+		}
+	];
+</script>

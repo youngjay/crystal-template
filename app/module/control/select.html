@@ -1,0 +1,39 @@
+<select class="form-control" data-bind="
+    options: options,
+    optionsCaption: optionsCaption,
+    optionsText: 'text',
+    optionsValue: 'value',
+    value: value,
+    event: event,
+    enable: editable
+">
+</select>
+<script>
+    var _ = require('lodash');
+    model = [
+        function(o) {
+            _.extend(this, o);
+            this.event = {};
+            var self = this;
+            if (this.validator) {
+                var clicked = false;
+
+                this.event.click = function() {
+                    clicked = true;
+                    return true;
+                };
+
+                this.event.change = function() {
+                    if (clicked) {                        
+                        self.validator.validate();
+                    }
+                    return true;
+                };
+            }
+        },
+        {
+            editable: true,
+            optionsCaption: null
+        }
+    ]
+</script>

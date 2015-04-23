@@ -1,0 +1,79 @@
+.sidebar-nav {
+    position: fixed; 
+    top: 20px;
+    border: 1px solid #ccc;
+    width:170px;
+    font-size: 14px;       
+
+    margin: 0;
+    padding: 0;
+
+    ol {
+        margin: 0;
+        padding: 0;
+    }
+
+    lv1Height = 42px;
+    lv2Height  = 32px;
+    pagePadding = 22px;
+
+    .lv1 {
+        > a {
+            height: lv1Height;
+            line-height: lv1Height;
+            padding-left: pagePadding + 6;
+        }
+
+        &.expand > a {
+            color: #08c;
+            font-weight: bold;
+        }
+        &.leaf:hover > a{
+          background-color: #d9edf7;
+          border-color: #bce8f1;
+        }
+        &.leaf.active > a {
+            background-color: #3565ad;
+            color: #fff;
+        }
+    }
+
+    .lv2 {
+        > a {
+            height: lv2Height ;
+            line-height: lv2Height ;
+            padding-left: pagePadding + 6 + 10;
+            color: #666;
+        }          
+
+        &.active > a {
+            background-color: #08c;
+            color: #fff;
+        } 
+    }    
+
+    li {
+        list-style: none;
+        border-bottom: 1px solid #ebebeb;
+        border-top: 1px solid #fff;
+        position: relative;
+        display: block;
+        cursor: pointer;
+
+        :hover > a {
+            background-color: #e6e6e6;
+        }
+
+        &:first-child {
+            border-top: 0;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            overflow: hidden;
+            color: inherit;
+            outline: none;                    
+        }
+    }
+}

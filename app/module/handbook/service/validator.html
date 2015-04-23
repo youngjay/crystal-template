@@ -1,0 +1,204 @@
+<div class="docs-section">
+	<h1>校验</h1>
+	<h2>目的</h2>
+	<p>为了不让用户漏掉相关重要内容的填写，为了保证用户输入的内容合法</p>
+	<h2>实例</h2>
+	<p>可以输入:张文涛、张涛、涛或者不输入内容，光标移到输入框外，看看效果</p>
+	<!-- ko module: modules.name --><!-- /ko -->
+</div>
+<div class="clearfix"></div>
+<div class="docs-section">
+	<h2>使用方法</h2>
+	<h3>引入模块</h3>
+	<pre>
+		<code>
+		    var Validator = require('service/validator');
+		    var v = require('service/validate-handlers'); //常用校验函数库
+		</code>
+	</pre>
+	<h3>注册校验方法</h3>
+	<pre>
+		<code>
+		this.myName.validator = new Validator(this.myName, [v.required, v.lengthEqual(3), function(value){
+											if(!(value.indexOf("张") > -1)){
+												return "姓名必须含有张"
+												}
+											}]);
+		</code>
+	</pre>
+	<h3>执行校验</h3>
+	<pre>
+		<code>
+			this.myName.validator.validate();
+		</code>
+	</pre>
+	<h3>参数</h3>
+	<table class="table table-bordered table-hover">
+    <tbody><tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>默认值</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>getValueFn</td>
+        <td>observable对象</td>
+        <td>无</td>
+        <td>待校验的observable属性</td>
+    </tr>
+    <tr>
+ 		<td>validatorHandlers</td>
+ 		<td>数组</td>
+ 		<td>无</td>
+ 		<td>对当前属性值的校验函数数组</td>
+    </tr>
+    <tr>
+        <td>getActivateStateFn</td>
+        <td>observable对象</td>
+        <td>返回值为true的函数</td>
+        <td>当前校验是否为激活状态</td>
+    </tr>
+</tbody></table>
+	<h3>接口</h3>
+	<table class="table table-bordered table-hover">
+    <tbody><tr>
+        <th>名称</th>
+        <th>入参</th>
+        <th>返回值</th>
+        <th>作用</th>
+    </tr>
+    <tr>
+        <td>validate</td>
+        <td>无</td>
+        <td>无</td>
+        <td>执行校验</td>
+    </tr>
+    <tr>
+ 		<td>clear</td>
+ 		<td>无</td>
+ 		<td>无</td>
+ 		<td>清除校验的错误信息</td>
+    </tr>
+</tbody></table>
+<p>代码位置：<code>app/service/validator.js</code> </p>
+
+	<h3>常用校验方法</h3>
+	<p>库位置：<code>app/service/validator-handler.js</code> </p>
+	<p>注意默认入参:是validator实例化的第一个observable对象（待校验对象）的对应的值</p>
+	<table class="table table-bordered table-hover">
+    <tbody>
+	<tr>
+        <th>名称</th>
+        <th>入参</th>
+        <th>返回值</th>
+        <th>作用</th>
+    </tr>
+    <tr>
+        <td>required</td>
+        <td>默认入参</td>
+        <td>校验未通过返回字符串<code>必填</code>，否则不返回</td>
+        <td>必填</td>
+    </tr>
+    <tr>
+ 		<td>number</td>
+ 		<td>默认入参</td>
+ 		<td>校验未通过返回字符串<code>必须是数字</code>，否则不返回</td>
+ 		<td>内容必须为数字</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>默认入参</td>
+        <td>校验未通过返回字符串<code>E-Mail格式不合法</code>，否则不返回</td>
+        <td>E-Mail格式合法性判断</td>
+    </tr>
+    <tr>
+ 		<td>largeThan<code>/</code>largeEqualThan</td>
+ 		<td>默认入参，需要传最小值min</td>
+ 		<td>校验未通过返回字符串<code>必须大于min</code>，否则不返回</td>
+ 		<td>下限值判断（包含/不包含下限）</td>
+    </tr>
+    <tr>
+ 		<td>lessThan<code>/</code>lessEqualThan</td>
+ 		<td>默认入参，需要传最大值max</td>
+ 		<td>校验未通过返回字符串<code>必须小于max</code>，否则不返回</td>
+ 		<td>上限值判断（包含/不包含上限）</td>
+    </tr>
+    <tr>
+        <td>lengthEqual<code>/</code>lengthLessEqualThan</td>
+        <td>默认入参，需要传长度len</td>
+        <td>校验未通过返回字符串<code>必须小于等于len</code>，否则不返回</td>
+        <td>文字长度判断（等于/小于等于）</td>
+    </tr>
+    <tr>
+ 		<td>mobile</td>
+ 		<td>默认入参</td>
+ 		<td>校验未通过返回字符串<code>手机号码格式不合法</code>，否则不返回</td>
+ 		<td>手机号码格式合法性判断</td>
+    </tr>
+    <tr>
+        <td>mobileLength</td>
+        <td>默认入参</td>
+        <td>校验未通过返回字符串<code>请输入11位手机号码</code>，否则不返回</td>
+        <td>11位手机号码判断</td>
+    </tr>
+    <tr>
+ 		<td>dateWithTime<code>/</code>date</td>
+ 		<td>默认入参</td>
+ 		<td>校验未通过返回字符串<code>日期不符合格式</code>，否则不返回</td>
+ 		<td>日期格式合法性判断</td>
+    </tr>
+</tbody></table>
+	<p>如果常用方法不满足，可以自定义校验方法，按照<code>校验未通过校验返回错误信息字符串，否则不返回</code>处理就行</p>
+</div>
+<div>
+    <h3>项目example</h3>
+    <p><a href="/example/service/validator">测试</a></p>
+    <p>实例代码位置：<code>example/service/validator.html</code></p>
+</div>
+
+<script>
+    var FormGroup = require('module/control/form-group');
+	var textBox = require("module/control/text-box");
+	var ko = require("knockout");
+
+    var Validator = require('service/validator');
+    var v = require('service/validate-handlers');
+
+	model = [
+		function(){
+			this.reset();
+			this.buildValidator();
+			this.buildModule();
+		},
+		{
+			reset: function(){
+				this.setData({
+					myName: null
+					}
+				);
+			},
+			buildValidator: function(){
+                this.validators = {
+                    myName: new Validator(this.myName, [v.required, v.lengthEqual(3), function(value){
+                    	if(!(value.indexOf("张") > -1)){
+                    		return "姓名必须含有张"
+                    	}
+                    }])
+                };
+			},
+			buildModule: function(){
+				this.modules = {
+					name: new FormGroup({
+						content: new textBox({
+							value: this.myName,
+	                        validator: this.validators.myName
+						}),
+						label: "姓名",
+                        cols: [1, 4],
+                        required: true
+					})
+				}
+			}
+		}
+	];
+</script>

@@ -1,0 +1,62 @@
+<div class="docs-section">
+	<h2>业务开发model一般结构</h2>
+	<pre>
+    	<code>
+		    var FormGroup = require('module/control/form-group');
+		    var CheckBox_Group = require('module/control/checkbox-group');
+
+		    var Validator = require('service/validator');
+		    var v = require('service/validate-handlers');
+
+			model = [
+				function(){
+					//init entrance
+					this.reset();
+					this.buildValidator();
+					this.buildModules();
+				},
+		        {
+		            reset: function(){
+		                this.setData({
+		                    week:[]
+		                    }
+		                );
+		            },
+		            buildValidator: function(){
+		                this.validators = {
+		                    bus:new Validator(this.week,[v.required])
+		                };
+		            },
+		            buildModule: function(){
+		                this.module = {
+		                   ktvDays: new FormGroup({
+		                        content: new CheckBox_Group({
+		                            value: this.week,
+		                            validator: this.validators.week,
+		            }
+		        }
+			];
+    	</code>
+	</pre>
+	<p>通过<code>require</code>引入对应的组件</p>
+	<p>我们开发的业务模块，一般包括这几个部分:</p>
+	<h3>function</h3>
+	<p>该模块实例化的入口函数，相当于该模块的构造函数</p>
+	<h3>reset</h3>
+	<p>调用继承的setData方法来完成当前模块的<code>mode</code>初始化,主要工作：</p>
+	<ul class="nav">
+ 		<li>1、初始化数据</li>
+ 		<li>2、转换对应属性为observable属性
+ 			<p>转换原因：充分利用函数也是对像的特点，给对应属性添加相关属性，比如enable、visible、validator等等</p>
+ 		</li>
+	</ul>
+	<h3>buildValidator</h3>
+	<p>给相关属性绑定校验方法</p>
+	<h3>buildModules</h3>
+	<p>构造当前模块的模版结构</p>
+
+</div>
+<div>
+	<h3>项目example</h3>
+	<p>实例代码位置：<code>example/component/mode.html</code></p>
+</div>

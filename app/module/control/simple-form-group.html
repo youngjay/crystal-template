@@ -1,0 +1,21 @@
+<div class="form-group">
+    <label class="control-label" data-bind="text: label"></label>
+    <!-- ko module: content --><!-- /ko -->
+</div>
+<script>
+    var _ = require('lodash');
+    var ko = require('knockout');
+
+    model = [
+        function(o) {
+            _.extend(this, o);
+            if (!this.content) {
+                throw new Error('"content" module must be supplied')
+            }
+        },
+        {
+            label: 'label not set'
+        }
+    ];
+
+</script>

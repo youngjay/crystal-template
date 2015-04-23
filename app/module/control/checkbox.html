@@ -1,0 +1,13 @@
+<label class="checkbox-inline">
+    <input type="checkbox" data-bind="checked: value">
+    {{text}}
+</label>
+<script>
+var _ = require('lodash');
+
+model = [
+    function(o) {
+        _.extend(this, o);
+    }
+]
+</script>

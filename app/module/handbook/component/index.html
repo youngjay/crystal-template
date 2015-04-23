@@ -1,0 +1,140 @@
+<article>
+ <div class="docs-section">
+ 	<h2>概念</h2>
+	<blockquote> <p>工程师希望能像 <code>搭积木</code> 一样开发和维护系统，通过组装模块得到一个完整的系统。</p> </blockquote> 
+	<p>在模块化系统的结构中，模块是可组合、可分解和更换的单元，这就要求模块本身具有一定的 <code>独立性</code>，完整的前端模块化方案需要将js、css和模板维护在一起，保证模块的独立。cyrstal采用bootstrap样式风格，所以我们的模块开发主要是html结构和js内容。样式可以采用bootstrap的样式或者采用内联方式。
+	</p>
+ </div>
+ <div class="docs-setion">
+ 	<h2>module结构</h2>
+ 	<p>module文件是一个html文件，包含</p>
+ 	<ul>
+   		<li>view -- html内容</li>
+   		<li>model -- script标签中的model变量</li>
+ 	</ul>
+ 	<p>module文件可以只有html结构，也可以只有script,情况分别如下：</p>
+ 	<ul>
+     	<li>
+     		<p>只含html</p>
+     		<pre>
+	     		<code class="language-html" data-lang="html">
+	     			<span class="nt">&lt;div&gt;</span>
+	     			<span>hello world</span>
+	     			<span class="nt">&lt;/div&gt</span>
+	  			</code>
+     		</pre>
+     	</li>
+     	<li>
+     		<p>含html和script</p>
+     		<pre>
+	     		<code class="language-html" data-lang="html">
+	     			<span class="nt">&lt;div&gt;</span>
+	     			<span>hello world</span>
+	     			<span class="nt">&lt;/div&gt</span>
+	  			</code>
+	  		</br>
+	     		<code class="language-html" data-lang="html">
+	     			<span class="nt">&lt;script&gt;</span>
+	     			<div>model = [</div>
+	     			<div>]</div>
+	     			<span class="nt">&lt;/script&gt</span>
+	  			</code>
+     		</pre>
+     	</li>
+     	<li>
+     		<p>也可以只含script</p>
+     		<pre>
+	     		<code class="language-html" data-lang="html">
+	     			<span class="nt">&lt;script&gt;</span>
+	     			<div>model = [</div>
+	     			<div>]</div>
+	     			<span class="nt">&lt;/script&gt</span>
+	  			</code>
+     		</pre>
+     	</li>
+ 	</ul>
+ 	<p>module文件一半存放在app/module目录下</p>
+ 	<p>module文件包含</p>
+	<ul class="task-list">
+		<li>
+			<a href="#view">view</a> —— html内容
+		</li>
+		<li>
+			<a href="#model">model</a> —— script标签中的model变量
+		</li>
+	</ul>
+	<p>html文件由<a href="https://github.com/youngjay/crystal-modulify">crystal-modulify</a>编译成一个module class</p>
+ </div>
+ <div class="docs-section">
+ 	<h2>view</h2>
+ 	<p>view基于<a href="http://www.knockoutjs.com/">knockout</a>的绑定语法，默认导入了<a href="http://mbest.github.io/knockout.punches/">knockout.punches</a>的语法。knockout的配置可以查看
+	<code>app/setup-knockout.js</code></p>
+ </div>
+ <div class="docs-section">
+ 	<h2>model</h2>
+ 	<p>crystal会把model转化成一个<a href="https://github.com/youngjay/mixin-class">mixin-class</a></p>
+ 	<p>model可以是一个array（推荐），function，或者object。</p>
+ 	<p>如果是数组的话，数组里面的function会被作为构造函数（可以多个，顺序执行）；object会被作为prototype；数组可以嵌套</p>
+ 	<p>在<code>app/vm.js</code>中定义了所有model的基类，它引入了以下方法：</p>
+ </div>
+
+ <div class="docs-section">
+	<h2>setData(data)</h2>
+	<p>data是一个object对象，setData会把data中value生成ko.observable()。
+请参考<a href="http://knockoutjs.com/documentation/plugins-mapping.html">knockout.mapping</a></p>
+ </div>
+
+ <div class="docs-section">
+ 	<h2>getData()</h2>
+ 	<p>把ko.observable()对象转成普通对象
+	请参考<a href="http://knockoutjs.com/documentation/plugins-mapping.html">knockout.mapping</a></p>
+ </div>
+ <div class="docs-section">
+ 	<h2>fetch(options)</h2>
+ 	<p>发起ajax请求</p>
+ 	<p>用jQuery的ajax实现</p>
+ 	<p>请参考<code>app/service/ajax.js</code></p>
+ </div>
+ <div class="docs-section">
+ 	<h2>pipe(fns,args..)</h2>
+ 	<p>把多个异步方法串联起来</p>
+ 	<ul class="task-list">
+		<li>fns: <code>Array</code> 需要串联的异步方法</li>
+		<li>args..: <code>Array</code> 除了fns之外的剩余参数。 在调用fns的第一个方法传入的参数</li>
+	</ul>
+ </div>
+ <div class="docs-section">
+ 	<h2>module layout</h2>
+ 	<p>在module每一层文件夹下面都一个添加一个<code>__layout.html</code>文件，该文件会作为对应目录的module layout文件。</p>
+ 	<p>__layout文件内必须包含一个<code>{{content}}</code>字符串</p>
+ 	<pre>
+ 	 	<code class="nt">&lt;div&gt;</code>
+ 		<span>{{content}}</span>
+ 		<code class="nt">&lt;/div&gt;</code>
+ 	</pre>
+ 	<p>在生成module的时候，{{content}}将会被替换成该目录下module的view</p>
+ 	<p>__layout.html可以嵌套在多个目录下</p>
+ </div>
+ <div class="docs-section">
+ 	<h2>redirect</h2>
+ 	<p>在<code>app/app-config.js</code>中定义</p>
+ 	<pre>
+module.exports = {
+    redirects: {
+        '/': '/rotate',
+
+        '/rotate': '/rotate/territory',
+        '/rotate/territory': '/rotate/territory/hierarchy',
+
+        '/rotate/team': '/rotate/team/list'
+    }
+}
+ 	</pre>
+ 	<p>当state发生变化的时候，crystal查找redirect配置，反复应用，直到最终。</p>
+ 	<p>如果当你配置上面那个redirect设置，并且访问 <code>/</code> 的时候</p>
+ 	<p>页面会进行如下redirect操作
+	<code>/</code>  -&gt;  <code>/rotate</code>  -&gt;  <code>/rotate/territory</code>  -&gt;  <code>/rotate/territory/hierarchy</code></p>
+</div>
+ </div>
+
+</article>

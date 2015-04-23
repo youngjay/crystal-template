@@ -1,0 +1,21 @@
+<textarea class="form-control" data-bind="value: value, event: event, enable: editable" rows="{{rows}}"></textarea>
+<script>
+    var $ = require('jquery');
+
+    module.exports = [
+        function() {
+            this.event = {};
+            var self = this;
+            if (this.validator) {
+                this.event.blur = function() {
+                    self.validator.validate();
+                };
+            }
+        },
+        {
+            rows: 3,
+            editable: true
+        }
+    ]
+</script>
+

@@ -1,0 +1,50 @@
+<div class="docs-section">
+    <h2>弹出框</h2>
+    <p>我们基于bootstrap的modal对话框，来自定义我们的弹出框</p>
+    <h3>实例</h3>
+    <div><button data-bind="click: showModal">modal</button></div>
+</div>
+<div class="docs-section">
+    <h3>实现</h3>
+    <pre>
+        <code>
+            <span>&lt;</span>div class="modal-dialog"<span>&gt;</span></br>
+                <span>&lt;</span>div class="modal-content"<span>&gt;</span></br>
+                    <span>&lt;</span>div class="modal-header"<span>&gt;</span></br>
+                        <span>&lt;</span>button type="button" class="close" data-bind="click: cancel" <span>&gt;</span>×<span>&lt;</span>/button<span>&gt;</span>
+                        自定义标题
+                    <span>&lt;</span>/div<span>&gt;</span></br>
+                    <span>&lt;</span>div class="modal-body"<span>&gt;</span>
+                        自定义内容
+                    <span>&lt;</span>/div<span>&gt;</span></br>
+                    <span>&lt;</span>div class="modal-footer" <span>&gt;</span></br>
+                        自定义底部或者就用下面两个button是个例子
+                        <span>&lt;</span>button type="button" class="btn btn-default" data-bind="click: notOK">No<span>&lt;</span>/button<span>&gt;</span>
+                        <span>&lt;</span>button type="button" class="btn btn-primary" data-bind="click: confirm">Yes<span>&lt;</span>/button<span>&gt;</span>
+                    <span>&lt;</span>/div<span>&gt;</span></br>
+                <span>&lt;</span>/div<span>&gt;</span></br>
+            <span>&lt;</span>/div<span>&gt;</span>
+        </code>
+    </pre>
+</div>
+
+<script>
+    model = [
+        {
+            showModal: function() {
+                this.modal({
+                    target: require('module/example/modal/modal-confirm'),
+                    confirm: function(isOK) {
+                        alert('I am ' + (isOK ? 'OK' : 'not OK'));
+                    },
+                    cancel: function() {
+                        alert('I am not sure')
+                    },
+                    complete: function() {
+                        alert('Bye')
+                    }
+                })
+            }
+        }
+    ]
+</script>

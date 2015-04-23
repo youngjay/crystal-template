@@ -1,0 +1,22 @@
+<!-- ko foreach: options -->
+<label class="radio-inline">
+    <input type="radio" data-bind="checked: $parent.value, checkedValue: value, event: $parent.event, enable: $parent.editable">{{text}}
+</label>
+<!-- /ko -->
+<script>
+    module.exports = [
+        function() {
+            this.event = {};
+            var self = this;
+            if (this.validator) {
+                this.event.click = function() {
+                    self.validator.validate();
+                    return true;
+                };
+            }
+        },
+        {
+            editable: true
+        }
+    ]
+</script>

@@ -1,0 +1,72 @@
+<!-- ko module: modules.week --><!-- /ko -->
+
+
+<script>
+
+    var FormGroup = require('module/control/form-group');
+    var CheckBox_Group = require('module/control/checkbox-group');
+
+    var Validator = require('service/validator');
+    var v = require('service/validate-handlers');
+
+	model = [
+		function(){
+            this.reset();
+            this.buildValidator();
+            this.buildModules();
+		},
+        {
+            reset: function(){
+                this.setData({
+                    bus:[]
+                    }
+                );
+            },
+
+            buildModules: function(){
+                this.modules = {
+                   week: new CheckBox_Group({
+                            value: this.bus,
+                            validator: this.validators.bus,
+                            options: [
+                                {
+                                    text:'周一',
+                                    value:1
+                                },
+                                {
+                                    text:'周二',
+                                    value:2
+                                },                   
+                                {
+                                    text:'周三',
+                                    value:3
+                                },
+                                {
+                                    text:'周四',
+                                    value:4
+                                },                    
+                                {
+                                    text:'周五',
+                                    value:5
+                                },
+                                {
+                                    text:'周六',
+                                    value:6
+                                },
+                                {
+                                    text:'周日',
+                                    value:7
+                                }
+                            ]
+                    }) 
+                };
+
+            },
+            buildValidator: function(){
+                this.validators = {
+                    bus:new Validator(this.bus,[v.required])
+                };
+            }
+        }
+	];
+</script>

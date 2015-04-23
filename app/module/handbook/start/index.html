@@ -1,0 +1,75 @@
+<div class="bs-docs-section">
+	<h2 class="page-header">1、安装工具</h2>
+	<p>安装node或者iojs</p>
+	<p>安装gulp</p>
+	<pre>
+		<code>npm install gulp -g</code>
+	</pre>
+</div>
+<div class="bs-docs-section">
+	<h2 class="page-header">2、下载实例</h2>
+	<p>使用 git clone <a target="_" href="https://github.com/youngjay/crystal-template">官网项目</a>（或直接 <a href="https://github.com/youngjay/crystal-template/archive/master.zip">下载</a> 解压）</p>
+	<pre>
+		<code>git clone https://github.com/youngjay/crystal-template.git</code>
+	</pre>
+
+	<p>进入项目目录</p>
+	<pre>
+ 		<code>cd crystal-template</code>
+	</pre>
+
+	<p>
+		开发目录结构一览
+	</p>
+
+	<pre>
+		<code>
+|-- README.md                      
+|-- app                  -- 存放本应用有关代码
+|   |-- asset            -- 存放资源文件，包括stylus以及图片
+|   |-- binding-handler  -- knockout的binding handlers
+|   |-- module           -- 存放组件，这是开发业务逻辑的主要目录
+|   `-- service          -- 各个组件需要用到的公用服务
+|-- dist                 -- 编译后的文件
+|-- gulpfile.js          -- gulp task
+|-- index.html           -- get start页面 
+|-- mock-server          -- 模拟后台返回的数据 
+|-- node_modules         -- 存放nodejs的库
+|-- package.json         -- nodejs 库的配置
+|-- server-config.js     -- 模拟后台返回的数据
+|-- server.js            -- get startserver的脚本
+、-- vendor               -- 非nodejs的库</code>
+	</pre>
+</div>
+<div class="bs-docs-section">
+	<h2 class="page-header">1、构建项目</h2>
+	<p>安装依赖包</p>
+	<pre>
+		<code>npm install</code>
+	</pre>
+	<p>编译</p>
+	<pre>
+		<code>gulp</code>
+	</pre>
+</div>
+<div class="bs-docs-section">
+	<h2 class="page-header">3、浏览项目</h2>
+	<p>启动server</p>
+	<pre>node server.js</pre>
+	<p>完成服务器启动后，打开浏览器访问 http://127.0.0.1:3000 即可预览项目效果。</p>
+</div>
+<div class="bs-docs-section">
+	<h2 class="page-header">4、文件监听</h2>
+	<pre>gulp watch</pre>
+	<p>保持node server.js启动的命令行终端不关闭，打开新的命令行终端，执行gulp watch命令，即可进入文件监听。修改项目中的代码并保存，刷新页面，刷新页面就可以看到最新更新效果（后续会做页面自动刷新功能，来提升开发效果）。</p>
+</div>
+<div class="bs-docs-section">
+	<h2 class="page-header">5、发布项目</h2>
+	<pre>gulp && gulp compress && gulp beta</pre>
+	三个命令依次代表编译、打包、静态包上传服务器，然后将命令行生成的最新版本号，更新到lion对应的环境中(后期会做lion配置版本自动更新，让开发更加专注于代码开发)
+</div>
+<footer class="bs-docs-footer">
+	至此，你已学会了crystal的基本用法，上手应该比较轻松吧:-D，如果在本章节使用上遇到什么问题，可以点击
+	<a href="/message">这里</a>  
+	 给我们留言。crystal会给你带来前所未有的开发体验
+</footer>

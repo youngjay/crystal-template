@@ -1,0 +1,189 @@
+<div class="docs-section">
+	<h1>文本输入框组件介绍</h1>
+	<h2>目的</h2>
+	<p>当前我们需要可读可写的输入框</p>
+	<h2>实例</h2>
+	<!-- ko module: textBox --><!-- /ko -->
+	<pre style="margin-top:15px;">
+      <code>
+&lt;!-- ko module: textBox --&gt;&lt;!-- /ko --&gt;
+      </code>
+      <code>
+      </br>
+ <span>&lt;</span>script<span>&gt;</span>
+ <code>
+	var textBox = require("module/control/text-box");
+
+	model = [
+		function(){
+			this.dealName = ko.observable("我是团单");
+			this.text = new textBox({
+				value: this.dealName
+			});
+		}
+	];
+ </code>
+ <span>&lt;</span>/script<span>&gt;</span>
+      </code>
+	</pre>
+</div>
+
+<div class="docs-section">
+	<h2>使用方法</h2>
+	<h3>引入模块</h3>
+	<pre>
+		<code>
+			var text = require("module/control/text-box"); //根据组件位置，引入组件模块
+			var ko = require("knockout");
+		</code>
+	</pre>
+	<h3>参数</h3>
+	<table class="table table-bordered table-hover">
+    <tbody><tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>默认值</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>value</td>
+        <td>observable对象</td>
+        <td>null</td>
+        <td>基本输入框</td>
+    </tr>
+    <tr>
+ 		<td>validator</td>
+ 		<td>校验组件</td>
+ 		<td>null</td>
+ 		<td>对当前属性的校验</td>
+    </tr>
+</tbody></table>
+	<h3>实例化模块，并传入对应参数</h3>
+	<pre>
+		<code>
+			this.dealName = ko.observable("我是团单");
+			this.textBox = new textBox({
+				text: this.dealName
+			});
+		</code>
+	</pre>
+	<h3>绑定模版</h3>
+	<pre>
+		<code>
+	      	&lt;!-- ko module: textBox --&gt;&lt;!-- /ko --&gt;
+		</code>
+	</pre>
+</div>
+<div class="docs-section">
+	<h3>嵌入form-group</h3>
+	<p>我们正常业务开发的时候，当我们引入的组件，想给它加个<code>label</code>来表示该输入框是表示姓名的录入，下一个输入框是年龄的录入，同时我们对录入的内容要添加校验操作</p>
+	<p>可以下面输入框不输入内容，blur的时候，能看到必填校验的效果</p>
+	<h3>实例</h3>
+	<!-- ko module: modules.name --><!-- /ko -->
+	<pre style="clear:both;">
+      <code>
+&lt;!-- ko module: modules.name --&gt;&lt;!-- /ko --&gt;
+      </code>
+      <code>
+      </br>
+ <span>&lt;</span>script<span>&gt;</span>
+ <code>
+    var FormGroup = require('module/control/form-group');
+	var textBox = require("module/control/text-box");
+	var ko = require("knockout");
+
+    var Validator = require('service/validator');
+    var v = require('service/validate-handlers');
+
+	model = [
+		function(){
+			this.reset();
+			this.buildValidator();
+			this.buildModule();
+		},
+		{
+			reset: function(){
+				this.setData({
+					myName: "张涛"
+					}
+				);
+			},
+			buildValidator: function(){
+			    this.validators = {
+			        myName: new Validator(this.myName, [v.required])
+			    };
+			},
+			buildModule: function(){
+				this.modules = {
+					name: new FormGroup({
+						content: new textBox({
+							value: this.myName,
+					        validator: this.validators.myName
+						}),
+						label: "姓名",
+					    cols: [1, 4],
+					    required: true
+					})
+				}
+			}
+		}
+	];
+ </code>
+ <span>&lt;</span>/script<span>&gt;</span>
+      </code>
+	</pre>
+<a href="/example/component/mode">参考基本mode结构</a>
+<p>后期我们业务组件开发，基本按照这种风格来开发</p>
+</div>
+<div>
+	<h3>项目example</h3>
+<p><a href="/example/component/text-box">测试</a></p>
+<p>实例代码位置：<code>example/component/text-box.html</code></p>
+</div>
+<script>
+    var FormGroup = require('module/control/form-group');
+	var textBox = require("module/control/text-box");
+	var ko = require("knockout");
+
+    var Validator = require('service/validator');
+    var v = require('service/validate-handlers');
+
+	model = [
+		function(){
+			this.dealName = ko.observable("我是团单"); //this.dealName = "我是团单"
+			this.textBox = new textBox({
+				value: this.dealName
+			});
+
+			this.reset();
+			this.buildValidator();
+			this.buildModule();
+		},
+		{
+			reset: function(){
+				this.setData({
+					myName: "张涛"
+					}
+				);
+			},
+			buildValidator: function(){
+                this.validators = {
+                    myName: new Validator(this.myName, [v.required])
+                };
+			},
+			buildModule: function(){
+				this.modules = {
+					name: new FormGroup({
+						content: new textBox({
+							value: this.myName,
+	                        validator: this.validators.myName
+						}),
+						label: "姓名",
+                        cols: [1, 4],
+                        required: true
+					})
+				}
+			}
+		}
+	];
+</script>

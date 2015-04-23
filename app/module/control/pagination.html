@@ -1,0 +1,162 @@
+<div class="pagination-container">
+    <div class="text">
+        共 <strong data-bind="text: total"></strong> 条记录
+    </div>
+
+    <ul data-bind="
+        delegateEvent: {
+            click: {
+                'a[role=index]': handleIndexClick
+            }
+        },
+        visible: pageCount() > 0
+    " class="pagination" >
+        <li data-bind="css: { disabled : index() === 1 }">
+            <a data-bind="click: first">首页</a>
+        </li>
+        <li data-bind="css: { disabled : index() === 1 }">
+            <a data-bind="click: prev">&laquo;</a>
+        </li>
+        <!-- ko foreach: pages -->
+        <li data-bind="css: { active: $data === $parent.index() }">
+            <a data-bind="text: $data" role="index"></a>
+        </li>
+        <!-- /ko -->
+        <li data-bind="css: { disabled : index() === pageCount() }">
+            <a data-bind="click: next">&raquo;</a>
+        </li>
+        <li data-bind="css: { disabled : index() === pageCount() }">
+            <a data-bind="click: last">尾页</a>
+        </li>
+
+    </ul>
+
+    <div data-bind="
+        visible: pageCount() > 0
+    ">
+        <div class="text">
+            每页
+        </div>
+        <select class="form-control" data-bind="
+            options: sizes,
+            value: size,
+            event: {
+                change: handleSizeChange
+            }
+        " style="width: auto">
+        </select>
+
+        <div class="text">
+            条
+        </div>
+    </div>
+
+    <div class="text">
+        共 <strong data-bind="text: pageCount"></strong> 页
+    </div>
+</div>
+<script>
+    var _ = require('lodash');
+    var ko = require('knockout');
+    var $ = require('jquery')
+
+    var stop = function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    };
+
+    var FIRST_INDEX = 1;
+
+    model = [
+        function (options) {
+            _.assign(this, options);
+
+            var halfDisplayPageCount = this.displayPageCount / 2;
+
+            var pageCount = ko.computed(function () {
+                return Math.ceil(this.total() / this.size());
+            }, this);
+
+            var pages = ko.computed(function () {
+                var currentIndex, count = pageCount();
+
+
+                if (count > this.displayPageCount) {
+                    currentIndex = this.index();
+
+                    if (currentIndex < halfDisplayPageCount) {
+                        return _.range(1, this.displayPageCount + 1);
+                    }
+
+                    if (currentIndex > count - halfDisplayPageCount) {
+                        return _.range(count - this.displayPageCount + 1, count + 1);
+                    }
+
+                    return _.range(currentIndex - halfDisplayPageCount + 1, currentIndex + halfDisplayPageCount + 1);
+
+                } else {
+                    return _.range(1, count + 1);
+                }
+            }, this);
+
+            this.pages = pages;
+            this.pageCount = pageCount;
+        },
+        {
+            displayPageCount: 6,
+            sizes: [10, 20, 50, 100],
+
+            onChange: function() {
+                throw new Error('to be implemented')
+            },
+
+            changeIndex: function(index) {
+                this.index(index);
+                this.onChange();
+            },
+
+            isAtFirst: function() {
+                return this.index() === 1;
+            },
+
+            isAtLast: function() {
+                return this.index() === this.pageCount();
+            },
+
+            prev: function () {
+                if (!this.isAtFirst()) {
+                    this.changeIndex(this.index() - 1);
+                }
+            },
+
+            first: function () {
+                if (!this.isAtFirst()) {
+                    this.changeIndex(FIRST_INDEX);
+                }
+            },
+
+            next: function () {
+                if (!this.isAtLast()) {
+                    this.changeIndex(this.index() + 1);
+                }
+            },
+
+            last: function () {
+                if (!this.isAtLast()) {
+                    this.changeIndex(this.pageCount());
+                }                
+            },
+
+            handleIndexClick: function (index) {
+                if (index !== this.index()) {
+                    this.changeIndex(index);
+                }
+            },
+
+            handleSizeChange: function() {
+                this.index(1);
+                this.onChange();
+            }
+        }
+    ]
+</script>

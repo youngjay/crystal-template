@@ -1,0 +1,20 @@
+<input type="text" class="form-control" data-bind="value: value, event: event, enable: editable, valueUpdate: valueUpdate">
+<script>
+    var _ = require('lodash');
+    model = [
+        function(o) {
+            _.extend(this, o);
+            this.event = {};
+            var self = this;
+            if (this.validator) {
+                this.event.blur = function() {
+                    self.validator.validate();
+                };
+            }
+        },
+        {
+            valueUpdate: ['blur'],
+            editable: true
+        }
+    ]
+</script>
