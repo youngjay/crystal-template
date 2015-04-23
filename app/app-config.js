@@ -5,7 +5,90 @@ module.exports = {
         '/example': '/example/index'
     },
     navs: {
-        example:[],
+        example:[
+            {
+                text: '基本功能',
+                path: '/example/fetch',
+                children: [
+                    {
+                        text: 'fetch',
+                        path: '/example/fetch',
+                        external: false
+                    },
+                    {
+                        text: 'pipe',
+                        path: '/example/pipe',
+                        external: false
+                    },
+                    {
+                        text: 'on-state-change',
+                        path: '/example/on-state-change',
+                        external: false
+                    },
+                    {
+                        text: 'nested-module',
+                        path: '/example/nested-module/index',
+                        external: false
+                    },
+                    {
+                        text: 'layout',
+                        path: '/example/layout/lv1/lv2/__layout',
+                        external: false
+                    }
+                ]
+            },
+            {
+                text: '基本组件',
+                path: '/example/component/text',
+                children: [
+                    {
+                        text: '文本',
+                        path: '/example/component/text',
+                        external: false
+                    },
+                    {
+                        text: 'formGroup',
+                        path: '/example/component/form-group',
+                        external: false
+                    },
+                    {
+                        text: '文本输入框',
+                        path: '/example/component/text-box',
+                        external: false
+                    },
+                    {
+                        text: 'validator',
+                        path: '/example/service/validator',
+                        external: false
+                    },
+                    {
+                        text: 'notification',
+                        path: '/example/service/notification',
+                        external: false
+                    },
+                    {
+                        text: 'modal',
+                        path: '/example/modal/index',
+                        external: false
+                    },
+                    {
+                        text: 'tree',
+                        path: '/example/tree/index',
+                        external: false
+                    },
+                    {
+                        text: 'pagination',
+                        path: '/example/pagination/index',
+                        external: false
+                    },
+                    {
+                        text: 'typeahead',
+                        path: '/example/typeahead/index',
+                        external: false
+                    },
+                ]
+            }
+        ],
         handbook: [
             {
                 text: '简介',

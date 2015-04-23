@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="col-sm-2">
-		<!-- ko module: handbook --><!-- /ko -->
+		<!-- ko module: sidbar --><!-- /ko -->
     </div>
     <div class="col-sm-10">
         {{content}}
@@ -13,7 +13,7 @@
 
     model = mixin(
         function() {
-        	this.handbook = new LSideBar(app.config.navs.handbook, this.__path);
+        	this.sidbar = new LSideBar(app.config.navs.handbook, this.__path);
         }
     )
 </script>

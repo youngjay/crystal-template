@@ -1,52 +1,19 @@
-<div class="example">
-    <ul class="navi">
-        <li>
-            <div>
-                基本功能
-            </div>
-            <ul>
-                <li>
-                    <a href="/example/fetch">fetch</a>
-                </li>
-                <li>
-                    <a href="/example/pipe">pipe</a>
-                </li>
-                <li>
-                    <a href="/example/on-state-change">on-state-change</a>
-                </li>
-                <li>
-                    <a href="/example/nested-module/index">nested-module</a>
-                </li>
-                <li>
-                    <a href="/example/layout/lv1/lv2/content">layout</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <div>
-                组件
-            </div>
-            <ul>
-                <li>
-                    <a href="/example/modal/index">modal</a>
-                </li>
-                <li>
-                    <a href="/example/notification">notification</a>
-                </li>
-                <li>
-                    <a href="/example/tree/index">tree</a>
-                </li>
-                <li>
-                    <a href="/example/pagination/index">pagination</a>
-                </li>
-                <li>
-                    <a href="/example/typeahead/index">typeahead</a>
-                </li>
-            </ul>        
-        </li>
-    </ul>
-    <div class="content">
+<div class="container-fluid">
+    <div class="col-sm-2">
+        <!-- ko module: sidbar --><!-- /ko -->
+    </div>
+    <div class="col-sm-10">
         {{content}}
     </div>
 </div>
 
+<script>
+    var LSideBar = require('module/control/left-sidebar');
+    var mixin = require('mixin-class');
+
+    model = mixin(
+        function() {
+            this.sidbar = new LSideBar(app.config.navs.example, this.__path);
+        }
+    )
+</script>
