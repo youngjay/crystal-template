@@ -168,12 +168,12 @@ module.exports = {
             },
             {
                 text: '组件开发',
-                path: '/handbook/cdev/index',
+                path: '/handbook/devcomponent/index',
                 external: false
             },
             {
                 text: '前端框架',
-                path: '/handbook/cdev/index',
+                path: '/handbook/framework/index',
                 external: false
             }
 
