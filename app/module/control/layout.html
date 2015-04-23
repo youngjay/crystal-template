@@ -1,0 +1,51 @@
+<ol class="sidebar-nav" data-bind="foreach: navs">
+    <!-- ko if: $data.children -->
+    <li class="lv1" data-bind="css: { active: active }">
+        <a href="{{path}}">{{text}}</a>
+        <ol data-bind="foreach: children">
+            <li class="lv2 leaf" data-bind="css: { active: active }">
+                <a href="{{path}}" data-bind="attr: { external: external ? '1' : null }">{{text}}</a>
+            </li>
+        </ol>
+    </li>
+    <!-- /ko -->
+
+    <!-- ko ifnot: $data.children -->
+    <li class="lv1 leaf" data-bind="css: { active: active }">
+        <a href="{{path}}" data-bind="attr: { external: external ? '1' : null }">{{text}}</a>
+    </li>
+    <!-- /ko -->
+</ol>
+<script>
+    var ko = require('knockout');
+    var mixin = require('mixin-class');
+    var _ = require('lodash');
+    var queryString = require('query-string');
+
+    var isPathInclude = function(parentPath, childPath) {
+        return (parentPath + '/').indexOf(childPath + '/') !== -1
+    };
+
+    var highlightActiveNavs = function(children, path) {
+   
+        children.forEach(function(child) {
+            if (isPathInclude(path, child.path)) {
+                child.active = true;
+            }
+            else {
+                child.active = false;
+            }
+
+            if (child.children) {
+                highlightActiveNavs(child.children, path);
+            }
+        })
+    };
+
+    model = mixin(
+        function(navs) {
+            this.navs = _.cloneDeep(navs);
+            highlightActiveNavs(this.navs, '/' + this.__path);
+        }
+    )
+</script>
