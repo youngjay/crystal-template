@@ -76,6 +76,11 @@ module.exports = {
                         external: false
                     },
                     {
+                        text: '单选组',
+                        path: '/example/component/radio-group',
+                        external: false
+                    },
+                    {
                         text: 'validator',
                         path: '/example/service/validator',
                         external: false
@@ -151,6 +156,11 @@ module.exports = {
                     {
                         text: '复选组',
                         path: '/handbook/component/checkbox-group',
+                        external: false
+                    },
+                    {
+                        text: '单选组',
+                        path: '/handbook/component/radio-group',
                         external: false
                     },
                     {

@@ -1,11 +1,13 @@
 <!-- ko foreach: options -->
-<label class="radio-inline">
-    <input type="radio" data-bind="checked: $parent.value, checkedValue: value, event: $parent.event, enable: $parent.editable">{{text}}
+<label class="radio-inline" style="margin-right: 10px">
+    <input type="radio" data-bind="checked: $parent.value, checkedValue: value, event: $parent.event, enable: $parent.editable ">{{text}}
 </label>
 <!-- /ko -->
 <script>
-    module.exports = [
-        function() {
+    var _ = require('lodash')
+    model = [
+        function(o) {
+            _.extend(this, o);
             this.event = {};
             var self = this;
             if (this.validator) {
