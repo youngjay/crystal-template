@@ -4,7 +4,21 @@ module.exports = {
         '/handbook': '/handbook/index',
         '/example': '/example/index'
     },
-    navs: {
+    navs:[
+        {
+            text: 'crystal',
+            path: '/',
+        },
+        {
+            text: '手册',
+            path: '/handbook',
+        },
+        {
+            text: '实例',
+            path: '/example',
+        }
+    ],
+    sidebars: {
         example:[
             {
                 text: '基本功能',
