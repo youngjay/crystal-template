@@ -12,6 +12,7 @@
             var self = this;
             if (this.validator) {
                 this.event.click = function() {
+                    debugger
                     self.validator.validate();
                     return true;
                 };

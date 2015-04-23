@@ -1,5 +1,94 @@
+<div class="docs-section">
+    <h1>复选框组</h1>
+    <h2>实例</h2>
 <!-- ko module: modules.week --><!-- /ko -->
 
+<div class="docs-section">
+    <h2>使用方法</h2>
+    <h3>引入模块</h3>
+    <pre>
+        <code>
+            var CheckBox_Group = require("module/control/checkbox-group"); //根据组件位置，引入组件模块
+        </code>
+    </pre>
+    <h3>参数</h3>
+    <table class="table table-bordered table-hover">
+    <tbody><tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>默认值</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>value</td>
+        <td>observable对象</td>
+        <td>null</td>
+        <td>基本输入框</td>
+    </tr>
+    <tr>
+        <td>validator</td>
+        <td>校验组件</td>
+        <td>null</td>
+        <td>对当前属性的校验</td>
+    </tr>
+    <tr>
+        <td>options</td>
+        <td>对象含有text,value的数组</td>
+        <td>null</td>
+        <td>复选框组信息,text表示显示的内容，value表示选中对应的值</td>
+    </tr>
+</tbody></table>
+    <h3>实例化模块，并传入对应参数</h3>
+    <pre>
+        <code>
+            var  week = new CheckBox_Group({
+                            value: this.week,
+                            validator: this.validators.week,
+                            options: [
+                                {
+                                    text:'周一',
+                                    value:1
+                                },
+                                {
+                                    text:'周二',
+                                    value:2
+                                },                   
+                                {
+                                    text:'周三',
+                                    value:3
+                                },
+                                {
+                                    text:'周四',
+                                    value:4
+                                },                    
+                                {
+                                    text:'周五',
+                                    value:5
+                                },
+                                {
+                                    text:'周六',
+                                    value:6
+                                },
+                                {
+                                    text:'周日',
+                                    value:7
+                                }
+                            ]
+                    })
+        </code>
+    </pre>
+    <h3>绑定模版</h3>
+    <pre>
+        <code>
+            &lt;!-- ko module: week --&gt;&lt;!-- /ko --&gt;
+        </code>
+    </pre>
+</div>
+<div>
+    <h3>项目example</h3>
+<p><a href="/example/component/checkbox-group">测试</a></p>
+<p>实例代码位置：<code>example/component/checkbox-group.html</code></p>
+</div>
 
 <script>
 
@@ -18,7 +107,7 @@
         {
             reset: function(){
                 this.setData({
-                    bus:[]
+                    week:[]
                     }
                 );
             },
@@ -26,8 +115,8 @@
             buildModules: function(){
                 this.modules = {
                    week: new CheckBox_Group({
-                            value: this.bus,
-                            validator: this.validators.bus,
+                            value: this.week,
+                            validator: this.validators.week,
                             options: [
                                 {
                                     text:'周一',
@@ -64,7 +153,7 @@
             },
             buildValidator: function(){
                 this.validators = {
-                    bus:new Validator(this.bus,[v.required])
+                    week:new Validator(this.week,[v.required])
                 };
             }
         }

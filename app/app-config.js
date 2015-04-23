@@ -71,6 +71,11 @@ module.exports = {
                         external: false
                     },
                     {
+                        text: '复选组',
+                        path: '/example/component/checkbox-group',
+                        external: false
+                    },
+                    {
                         text: 'validator',
                         path: '/example/service/validator',
                         external: false
@@ -144,6 +149,11 @@ module.exports = {
                         external: false
                     },
                     {
+                        text: '复选组',
+                        path: '/handbook/component/checkbox-group',
+                        external: false
+                    },
+                    {
                         text: 'validator',
                         path: '/handbook/service/validator',
                         external: false
@@ -156,11 +166,6 @@ module.exports = {
                     {
                         text: '弹出框',
                         path: '/handbook/service/modal',
-                        external: false
-                    },
-                    {
-                        text: '复选组',
-                        path: '/handbook/component/checkbox-group',
                         external: false
                     }
                 ],
