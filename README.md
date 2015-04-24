@@ -16,8 +16,9 @@
 - [module](#module)
   - [view](#view)
   - [model](#model)
+    - [afterRender($container)](afterrendercontainer)
     - [setData(data)](#setdatadata)
-    - [getData()](#setdata)
+    - [getData()](#getdata)
     - [modal(options)](#modaloptions)
     - [fetch(options)](#fetchoptions)
     - [pipe(fns,args..)](#pipefnsargs)
@@ -111,6 +112,9 @@ model可以是一个array（推荐），function，或者object。
 如果是数组的话，数组里面的function会被作为构造函数（可以多个，顺序执行）；object会被作为prototype；数组可以嵌套
 
 在`app/vm.js`中定义了所有model的基类，它引入了以下方法：
+
+###afterRender($container)
+当module被渲染完之后触发，传入module所在的元素。一般用于非knockout绑定的dom操作
 
 ###setData(data)
 data是一个object对象，setData会把data中value生成ko.observable()。

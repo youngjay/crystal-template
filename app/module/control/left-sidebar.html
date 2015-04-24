@@ -1,7 +1,7 @@
 <ol class="sidebar-nav" data-bind="foreach: navs">
     <!-- ko if: $data.children -->
     <li class="lv1" data-bind="css: { active: active }">
-        <a href="{{path}}">{{text}}</a>
+        <a href="{{path}}" data-bind="attr: { external: external ? '1' : null }">{{text}}</a>
         <ol data-bind="foreach: children">
             <li class="lv2 leaf" data-bind="css: { active: active }">
                 <a href="{{path}}" data-bind="attr: { external: external ? '1' : null }">{{text}}</a>
