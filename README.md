@@ -17,10 +17,13 @@
   - [view](#view)
   - [model](#model)
     - [setData(data)](#setdatadata)
-    - [getData()](#setdata)
+    - [getData()](#getdata)
     - [modal(options)](#modaloptions)
     - [fetch(options)](#fetchoptions)
     - [pipe(fns,args..)](#pipefnsargs)
+  - [life cycle](#lifecycle)
+    - [afterRender($container)](#afterrendercontainer)
+    - [dispose()](#dispose)
 - [state](#state)
 - [page route](#page-route)
 - [module layout](#module-layout)
@@ -142,6 +145,14 @@ data是一个object对象，setData会把data中value生成ko.observable()。
 
 - fns: `Array` 需要串联的异步方法
 - args..: `Array` 除了fns之外的剩余参数。 在调用fns的第一个方法传入的参数
+
+##life cycle
+
+###afterRender($container)
+当module被渲染完之后触发，传入module所在的元素。一般用于非knockout绑定的dom操作
+
+###dispose()
+当module被从DOM中移除后触发。一般用于清理数据
 
 #app state
 使用[crystal-state]作为app全局状态
