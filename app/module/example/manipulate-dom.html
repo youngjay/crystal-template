@@ -1,0 +1,16 @@
+<div class="manipulate-container"></div>
+<script>
+    var $ = require('jquery');
+
+    model = {
+        afterRender: function(elements) {
+            this.$container = $(elements).find('.manipulate-container');
+
+            $('<button>create by jquery</button>')
+                .on('click', function() {
+                    alert('event added by jquery');
+                })
+                .appendTo(this.$container)
+        }
+    }
+</script>

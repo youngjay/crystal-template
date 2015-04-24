@@ -35,17 +35,20 @@
                 child.active = false;
             }
 
+            if (!child.external) {
+                child.external = false;
+            }
+
             if (child.children) {
                 highlightActiveNavs(child.children, path);
             }
         })
     };
 
-    model = mixin(
+    model = [
         function(navs, __path) {
-
             this.navs = _.cloneDeep(navs);
             highlightActiveNavs(this.navs, '/' + __path);
         }
-    )
+    ]
 </script>

@@ -26,28 +26,27 @@ module.exports = {
                 children: [
                     {
                         text: 'fetch',
-                        path: '/example/fetch',
-                        external: false
+                        path: '/example/fetch'
                     },
                     {
                         text: 'pipe',
-                        path: '/example/pipe',
-                        external: false
+                        path: '/example/pipe'
                     },
                     {
                         text: 'on-state-change',
-                        path: '/example/on-state-change',
-                        external: false
+                        path: '/example/on-state-change'
                     },
                     {
                         text: 'nested-module',
-                        path: '/example/nested-module/index',
-                        external: false
+                        path: '/example/nested-module/index'
                     },
                     {
                         text: 'layout',
-                        path: '/example/layout/lv1/lv2/__layout',
-                        external: false
+                        path: '/example/layout/lv1/lv2/content'
+                    },
+                    {
+                        text: '操作DOM',
+                        path: '/example/manipulate-dom'
                     }
                 ]
             },
@@ -57,72 +56,59 @@ module.exports = {
                 children: [
                     {
                         text: '文本',
-                        path: '/example/component/text',
-                        external: false
+                        path: '/example/component/text'
                     },
                     {
                         text: 'formGroup',
-                        path: '/example/component/form-group',
-                        external: false
+                        path: '/example/component/form-group'
                     },
                     {
                         text: '文本输入框',
-                        path: '/example/component/text-box',
-                        external: false
+                        path: '/example/component/text-box'
                     },
                     {
                         text: '复选组',
-                        path: '/example/component/checkbox-group',
-                        external: false
+                        path: '/example/component/checkbox-group'
                     },
                     {
                         text: '单选组',
-                        path: '/example/component/radio-group',
-                        external: false
+                        path: '/example/component/radio-group'
                     },
                     {
                         text: 'validator',
-                        path: '/example/service/validator',
-                        external: false
+                        path: '/example/service/validator'
                     },
                     {
                         text: 'notification',
-                        path: '/example/service/notification',
-                        external: false
+                        path: '/example/service/notification'
                     },
                     {
                         text: 'modal',
-                        path: '/example/modal/index',
-                        external: false
+                        path: '/example/modal/index'
                     },
                     {
                         text: 'tree',
-                        path: '/example/tree/index',
-                        external: false
+                        path: '/example/tree/index'
                     },
                     {
                         text: 'pagination',
-                        path: '/example/pagination/index',
-                        external: false
+                        path: '/example/pagination/index'
                     },
                     {
                         text: 'typeahead',
-                        path: '/example/typeahead/index',
-                        external: false
-                    },
+                        path: '/example/typeahead/index'
+                    }
                 ]
             }
         ],
         handbook: [
             {
                 text: '简介',
-                path: '/handbook/instruction',
-                external: false
+                path: '/handbook/instruction'
             },
             {
                 text: '环境搭建',
-                path: '/handbook/start/index',
-                external: false
+                path: '/handbook/start/index'
             },
             {
                 text: '组件使用',
@@ -130,66 +116,53 @@ module.exports = {
                 children:[
                     {
                         text: '基本介绍',
-                        path: '/handbook/component/index',
-                        external: false
+                        path: '/handbook/component/index'
                     },
                     {
                         text: 'mode结构',
-                        path: '/handbook/component/mode',
-                        external: false
+                        path: '/handbook/component/mode'
                     },
                     {
                         text: '文本',
-                        path: '/handbook/component/text',
-                        external: false
+                        path: '/handbook/component/text'
                     },
                     {
                         text: 'formGroup',
-                        path: '/handbook/component/form-group',
-                        external: false
+                        path: '/handbook/component/form-group'
                     },
                     {
                         text: '文本输入框',
-                        path: '/handbook/component/text-box',
-                        external: false
+                        path: '/handbook/component/text-box'
                     },
                     {
                         text: '复选组',
-                        path: '/handbook/component/checkbox-group',
-                        external: false
+                        path: '/handbook/component/checkbox-group'
                     },
                     {
                         text: '单选组',
-                        path: '/handbook/component/radio-group',
-                        external: false
+                        path: '/handbook/component/radio-group'
                     },
                     {
                         text: 'validator',
-                        path: '/handbook/service/validator',
-                        external: false
+                        path: '/handbook/service/validator'
                     },
                     {
                         text: 'notification',
-                        path: '/handbook/service/notification',
-                        external: false
+                        path: '/handbook/service/notification'
                     },
                     {
                         text: '弹出框',
-                        path: '/handbook/service/modal',
-                        external: false
+                        path: '/handbook/service/modal'
                     }
-                ],
-                external: false
+                ]
             },
             {
                 text: '组件开发',
-                path: '/handbook/devcomponent/index',
-                external: false
+                path: '/handbook/devcomponent/index'
             },
             {
                 text: '前端框架',
-                path: '/handbook/framework/index',
-                external: false
+                path: '/handbook/framework/index'
             }
 
         ]
