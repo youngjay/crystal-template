@@ -134,8 +134,8 @@ module.exports = {
                         external: false
                     },
                     {
-                        text: 'mode结构',
-                        path: '/handbook/component/mode',
+                        text: 'model结构',
+                        path: '/handbook/component/model',
                         external: false
                     },
                     {
