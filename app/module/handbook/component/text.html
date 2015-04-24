@@ -12,12 +12,12 @@
       </br>
  <span>&lt;</span>script<span>&gt;</span>
  <code>
-	var text = require("module/component/form/text");
+	var Text = require("module/component/form/static");
 
 	model = [
 		function(){
 			this.dealName = ko.observable("我是团单");
-			this.text = new text({
+			this.text = new Text({
 				value: this.dealName
 			});
 		}
@@ -32,7 +32,7 @@
 	<h3>引入模块</h3>
 	<pre>
 		<code>
-			var text = require("module/control/static"); //根据组件位置，引入组件模块
+			var Text = require("module/control/static"); //根据组件位置，引入组件模块
 			var ko = require("knockout");
 		</code>
 	</pre>
@@ -74,12 +74,12 @@
 <p>实例代码位置：<code>example/component/text.html</code></p>
 </div>
 <script>
-	var text = require("module/control/static");
+	var TextStatic = require("module/control/static");
 	var ko = require("knockout");
 	model = [
 		function(){
 			this.dealName = ko.observable("我是团单"); //this.dealName = "我是团单"
-			this.text = new text({
+			this.text = new TextStatic({
 				text: this.dealName
 			});
 		}

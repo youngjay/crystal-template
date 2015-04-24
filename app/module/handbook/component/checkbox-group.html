@@ -8,7 +8,7 @@
     <h3>引入模块</h3>
     <pre>
         <code>
-            var CheckBox_Group = require("module/control/checkbox-group"); //根据组件位置，引入组件模块
+            var CheckBoxGroup = require("module/control/checkbox-group"); //根据组件位置，引入组件模块
         </code>
     </pre>
     <h3>参数</h3>
@@ -41,7 +41,7 @@
     <h3>实例化模块，并传入对应参数</h3>
     <pre>
         <code>
-            var  week = new CheckBox_Group({
+            var  week = new CheckBoxGroup({
                             value: this.week,
                             validator: this.validators.week,
                             options: [
@@ -93,7 +93,7 @@
 <script>
 
     var FormGroup = require('module/control/form-group');
-    var CheckBox_Group = require('module/control/checkbox-group');
+    var CheckBoxGroup = require('module/control/checkbox-group');
 
     var Validator = require('service/validator');
     var v = require('service/validate-handlers');
@@ -114,7 +114,7 @@
 
             buildModules: function(){
                 this.modules = {
-                   week: new CheckBox_Group({
+                   week: new CheckBoxGroup({
                             value: this.week,
                             validator: this.validators.week,
                             options: [

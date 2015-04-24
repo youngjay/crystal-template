@@ -17,7 +17,7 @@
 	model = [
 		function(){
 			this.dealName = ko.observable("我是团单");
-			this.text = new textBox({
+			this.text = new TextBox({
 				value: this.dealName
 			});
 		}
@@ -33,7 +33,7 @@
 	<h3>引入模块</h3>
 	<pre>
 		<code>
-			var text = require("module/control/text-box"); //根据组件位置，引入组件模块
+			var TextBox = require("module/control/text-box"); //根据组件位置，引入组件模块
 			var ko = require("knockout");
 		</code>
 	</pre>
@@ -89,7 +89,7 @@
  <span>&lt;</span>script<span>&gt;</span>
  <code>
     var FormGroup = require('module/control/form-group');
-	var textBox = require("module/control/text-box");
+	var TextBox = require("module/control/text-box");
 	var ko = require("knockout");
 
     var Validator = require('service/validator');
@@ -116,7 +116,7 @@
 			buildModule: function(){
 				this.modules = {
 					name: new FormGroup({
-						content: new textBox({
+						content: new TextBox({
 							value: this.myName,
 					        validator: this.validators.myName
 						}),
@@ -142,7 +142,7 @@
 </div>
 <script>
     var FormGroup = require('module/control/form-group');
-	var textBox = require("module/control/text-box");
+	var TextBox = require("module/control/text-box");
 	var ko = require("knockout");
 
     var Validator = require('service/validator');
@@ -151,7 +151,7 @@
 	model = [
 		function(){
 			this.dealName = ko.observable("我是团单"); //this.dealName = "我是团单"
-			this.textBox = new textBox({
+			this.textBox = new TextBox({
 				value: this.dealName
 			});
 
@@ -174,7 +174,7 @@
 			buildModule: function(){
 				this.modules = {
 					name: new FormGroup({
-						content: new textBox({
+						content: new TextBox({
 							value: this.myName,
 	                        validator: this.validators.myName
 						}),
