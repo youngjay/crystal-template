@@ -1,0 +1,89 @@
+<div class="docs-section">
+    <h1>智能下拉搜索</h1>
+    <h2>实例</h2>
+<!-- ko module: typeahead --><!-- /ko -->
+
+<div class="docs-section">
+    <h2>使用方法</h2>
+    <h3>引入模块</h3>
+    <pre>
+        <code>
+                var AbstractTypeahead = require('module/control/abstract-typeahead'); //根据组件位置，引入组件模块
+        </code>
+    </pre>
+    <h3>参数</h3>
+    <table class="table table-bordered table-hover">
+    <tbody><tr>
+        <th>名称</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>text</td>
+        <td>当前选中显示内容</td>
+    </tr>
+    <tr>
+        <td>value</td>
+        <td>当前选中对应的值</td>
+    </tr>
+    <tr>
+        <td>validator</td>
+        <td>校验组件</td>
+    </tr>
+</tbody></table>
+    <h3>实例化模块，并传入对应参数</h3>
+    <pre>
+        <code>
+            this.typeahead = new AbstractTypeahead({
+                text: 'hello',
+                value: 1
+            });
+        </code>
+    </pre>
+    <h3>绑定模版</h3>
+    <pre>
+        <code>
+            &lt;!--  ko module: typeahead  --&gt;&lt;!-- /ko --&gt;
+        </code>
+    </pre>
+</div>
+<div>
+    <h3>项目example</h3>
+<p><a href="/example/component/typeahead">测试</a></p>
+<p>实例代码位置：<code>example/component/typeahead.html</code></p>
+</div>
+
+<script>
+    var AbstractTypeahead = require('module/control/abstract-typeahead');
+    var ko = require('knockout');
+
+    model = [
+        function() {
+            this.setData({
+                itemsText: 'hello\nworld\nTom',
+
+                typeaheadText: "hello",
+                typeaheadValue: 1,
+            });
+
+            var items = ko.pureComputed(function() {
+                return this.itemsText().split(/\n+/).map(function(word, i) {
+                    return {
+                        text: word,
+                        value: i
+                    }
+                });
+            }, this);
+
+            this.typeahead = new AbstractTypeahead({
+                text: this.typeaheadText,
+                value: this.typeaheadValue
+            });
+
+            this.typeahead.source = function(key, callback) {
+                callback(items().filter(function(word) {
+                    return word.text.indexOf(key) !== -1
+                }));
+            }
+        }
+    ]
+</script>

@@ -1,0 +1,78 @@
+<input type="text" class="form-control" data-bind="event: event"/>
+<script>
+var _ = require('lodash');
+var ko = require('knockout');
+
+var unwrapObservable = ko.utils.unwrapObservable;
+var typeaheadKey = "ttTypeahead";
+var $ = require('jquery');
+var Typeahead = $.fn.typeahead;
+
+model = [
+    /*
+      o.text
+      o.value is required   
+    */
+    function(o) {
+        _.extend(this, o);
+        this.event = {};
+        var self = this;
+        if (this.validator) {
+            this.event.blur = function() {
+                setTimeout(function() {
+                    self.validator.validate();
+                }, 200);                
+            };
+        }
+    },
+    {
+        placeholder: '',
+        displayKey: 'text',
+        strict: true,
+
+        afterRender: function(element) {
+            var self = this;
+            var $element = $(element);
+
+            $element.typeahead({
+                hint: true,
+                highlight: true,
+                autoselect: true,
+                minLength: 0
+            },
+            {
+                displayKey: this.displayKey,
+                source: this.source.bind(this)
+            });
+
+            // 单向绑定
+            ko.computed(function() {
+                $element.typeahead('val', self.text());
+            });                
+
+            $element.bind('typeahead:selected', function(e, item) {
+                self.value(item.value);
+                self.text(item.text);
+                self.onSelect();
+            })
+            
+            if (this.strict) {
+                $element.bind('blur', function() {
+                    if ($element.val().length) {
+                        $element.val(self.text());
+                    }
+                    // clear selection
+                    else {
+                        self.value(null);
+                        self.text(null);
+                    }                
+                });
+            }              
+        },
+
+        // to be implement
+        onSelect:function(){
+        }
+    }
+]
+</script>

@@ -17,7 +17,7 @@
     <textarea rows="10" class="form-control" data-bind="value: itemsText"></textarea>
 </div>
 <script>
-    var AbstractTypeahead = require('./abstract-typeahead');
+    var AbstractTypeahead = require('module/control/abstract-typeahead');
     var ko = require('knockout');
 
     model = [
@@ -25,8 +25,8 @@
             this.setData({
                 itemsText: 'hello\nworld\nTom',
 
-                typeaheadText: "hello",
-                typeaheadValue: 1,
+                typeaheadText: null,
+                typeaheadValue: null,
             });
 
             var items = ko.pureComputed(function() {

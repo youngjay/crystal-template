@@ -75,6 +75,10 @@ module.exports = {
                         path: '/example/component/radio-group'
                     },
                     {
+                        text: '智能下拉搜索',
+                        path: '/example/component/typeahead'
+                    },
+                    {
                         text: 'validator',
                         path: '/example/service/validator'
                     },
@@ -141,6 +145,10 @@ module.exports = {
                     {
                         text: '单选组',
                         path: '/handbook/component/radio-group'
+                    },
+                    {
+                        text: '智能下拉搜索',
+                        path: '/handbook/component/typeahead'
                     },
                     {
                         text: 'validator',
