@@ -26,6 +26,10 @@
         <td>当前选中对应的值</td>
     </tr>
     <tr>
+        <td>source</td>
+        <td>我们提供了一个 source 函数来提供数据，这个函数接收两个参数，第一个参数 query 表示用户的输入，第二个参数是 process 函数，这个 process 函数是 typeahead 提供的，用来处理我们的数据。可以参考bootrstrap typeahead中的source使用</td>
+    </tr>
+    <tr>
         <td>validator</td>
         <td>校验组件</td>
     </tr>
@@ -34,8 +38,13 @@
     <pre>
         <code>
             this.typeahead = new AbstractTypeahead({
-                text: 'hello',
-                value: 1
+                text: this.typeaheadText,
+                value: this.typeaheadValue,
+                source: function(query, process) {
+                    process(items().filter(function(word) {
+                        return word.text.indexOf(query) !== -1
+                    }));
+                }
             });
         </code>
     </pre>
@@ -76,14 +85,14 @@
 
             this.typeahead = new AbstractTypeahead({
                 text: this.typeaheadText,
-                value: this.typeaheadValue
+                value: this.typeaheadValue,
+                source: function(query, process) {
+                    process(items().filter(function(word) {
+                        return word.text.indexOf(query) !== -1
+                    }));
+                }
             });
 
-            this.typeahead.source = function(key, callback) {
-                callback(items().filter(function(word) {
-                    return word.text.indexOf(key) !== -1
-                }));
-            }
         }
     ]
 </script>

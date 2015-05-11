@@ -40,7 +40,6 @@ module.exports = function(state, page, config) {
     };
 
     state.onChange(function(data) {
-        debugger
         if (!applyRedirect(data)) {            
             applyPage(data);
             applyTitle(data);  
