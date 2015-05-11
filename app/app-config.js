@@ -151,6 +151,10 @@ module.exports = {
                         path: '/handbook/component/typeahead'
                     },
                     {
+                        text: '日期控件',
+                        path: '/handbook/component/date'
+                    },
+                    {
                         text: 'validator',
                         path: '/handbook/service/validator'
                     },

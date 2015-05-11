@@ -59,6 +59,17 @@ ko.filters.json = function(o) {
         }
     });
 })({
+    datepicker: [require('./binding-handler/datepicker'), {
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true
+    }],
+
+    datetimepicker: [require('./binding-handler/datetimepicker'), {
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true
+    }],
     module: require('./binding-handler/module'),
     delegateEvent: require('./binding-handler/delegate-event')
 });

@@ -1,0 +1,20 @@
+<input class="apollo-form-control" data-bind="datepicker: {
+    value: value,
+    format: 'yyyy-mm-dd'
+}, disable: config.readonly" />
+
+<script>
+
+    var ko = require('knockout');
+    var _ = require('lodash');
+
+    model = [
+        function(o){
+            _.assign(this,o);
+            this.config = {
+                readonly: false
+            };
+        }
+    ];
+
+</script>

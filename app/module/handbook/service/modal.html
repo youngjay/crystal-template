@@ -4,35 +4,81 @@
     <h3>实例</h3>
     <div><button data-bind="click: showModal">modal</button></div>
 </div>
+
 <div class="docs-section">
-    <h3>实现</h3>
+    <h2>使用方法</h2>
+    <h3>引入模块</h3>
+    <p>由于每个模块的实现都继承了vm.js的公共方法和属性，其中就有modal方法，因此不需要我们自己引用，框架已经自己引用了。</p>
+    <p>我们可以直接调用对应的modal方法this.modal</p>
+    <h3>参数</h3>
+    <table class="table table-bordered table-hover">
+    <tbody><tr>
+        <th>名称</th>
+        <th>类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>data</td>
+        <td>object</td>
+        <td>数据传递</td>
+    </tr>
+    <tr>
+        <td>target</td>
+        <td>弹出框模块</td>
+        <td>弹出框对应的页面,该页面打开会立即执行onOpen方法，参数有data、callback,分别表示传过来的数据,自身的回调处理，感兴趣研究的具体参见<code>/service/modal.js中</code>的onOpen方法</td>
+    </tr>
+    <tr>
+        <td>confirm</td>
+        <td>function</td>
+        <td>确认回调点击确认按钮触发</td>
+    </tr>
+    <tr>
+        <td>cancel</td>
+        <td>function</td>
+        <td>取消回调，点击取消按钮触发</td>
+    </tr>
+    <tr>
+        <td>complete</td>
+        <td>function</td>
+        <td>完成回调，弹出框完全关闭后会触发</td>
+    </tr>
+</tbody></table>
+    <h3>实例化模块，并传入对应参数</h3>
     <pre>
         <code>
-            <span>&lt;</span>div class="modal-dialog"<span>&gt;</span></br>
-                <span>&lt;</span>div class="modal-content"<span>&gt;</span></br>
-                    <span>&lt;</span>div class="modal-header"<span>&gt;</span></br>
-                        <span>&lt;</span>button type="button" class="close" data-bind="click: cancel" <span>&gt;</span>×<span>&lt;</span>/button<span>&gt;</span>
-                        自定义标题
-                    <span>&lt;</span>/div<span>&gt;</span></br>
-                    <span>&lt;</span>div class="modal-body"<span>&gt;</span>
-                        自定义内容
-                    <span>&lt;</span>/div<span>&gt;</span></br>
-                    <span>&lt;</span>div class="modal-footer" <span>&gt;</span></br>
-                        自定义底部或者就用下面两个button是个例子
-                        <span>&lt;</span>button type="button" class="btn btn-default" data-bind="click: notOK">No<span>&lt;</span>/button<span>&gt;</span>
-                        <span>&lt;</span>button type="button" class="btn btn-primary" data-bind="click: confirm">Yes<span>&lt;</span>/button<span>&gt;</span>
-                    <span>&lt;</span>/div<span>&gt;</span></br>
-                <span>&lt;</span>/div<span>&gt;</span></br>
-            <span>&lt;</span>/div<span>&gt;</span>
+            this.showModal=function() {
+                    target: require('module/example/modal/modal-confirm'),
+                    confirm: function(isOK) {
+                        alert('I am ' + (isOK ? 'OK' : 'not OK'));
+                    },
+                    cancel: function() {
+                        alert('I am not sure')
+                    },
+                    complete: function() {
+                        alert('Bye')
+                    }
+                });
         </code>
     </pre>
+    <h3>绑定事件</h3>
+    <pre>
+        <code>
+            &lt;button data-bind="click: showModal">modal&lt;/button&gt;
+        </code>
+    </pre>
+</div>
+<div>
+    <h3>项目example</h3>
+<p><a href="/example/modal/index">测试</a></p>
+<p>实例代码位置：<code>example/modal/index.html</code></p>
 </div>
 
 <script>
     model = [
-        {
-            showModal: function() {
+        function(){
+            this.showModal=function() {
                 this.modal({
+                    data: {name:"I am textModal!!"},
                     target: require('module/example/modal/modal-confirm'),
                     confirm: function(isOK) {
                         alert('I am ' + (isOK ? 'OK' : 'not OK'));

@@ -1,0 +1,22 @@
+<!-- ko module: datePicker --><!-- /ko -->
+<script>
+	var DatePicker = require('module/control/date');
+	model = [
+		function(){
+			var self = this;
+			this.reset();
+			this.datePicker = new DatePicker(
+					{
+						value:self.classDate
+					}
+				);
+		},{
+			reset: function(){
+				this.setData({
+					classDate: '2014-11-11'
+				});
+			}
+		}
+	];
+
+</script>
