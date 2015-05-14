@@ -41,6 +41,10 @@ module.exports = {
                         path: '/example/nested-module/index'
                     },
                     {
+                        text: 'tree',
+                        path: '/example/tree/index'
+                    },
+                    {
                         text: 'layout',
                         path: '/example/layout/lv1/lv2/content'
                     },

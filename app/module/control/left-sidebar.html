@@ -1,8 +1,11 @@
 <ol class="sidebar-nav" data-bind="foreach: navs">
     <!-- ko if: $data.children -->
     <li class="lv1" data-bind="css: { active: active }">
-        <a href="{{path}}" data-bind="attr: { external: external ? '1' : null }">{{text}}</a>
-        <ol data-bind="foreach: children">
+        <span data-bind="click: $parent.toggle">{{text}}
+        <i class="glyphicon glyphicon-plus" data-bind="visible: !$data._expand()"></i>
+        <i class="glyphicon glyphicon-minus" data-bind="visible: $data._expand()"></i>
+        </span>
+        <ol data-bind="foreach: children, visible: $data._expand()">
             <li class="lv2 leaf" data-bind="css: { active: active }">
                 <a href="{{path}}" data-bind="attr: { external: external ? '1' : null }">{{text}}</a>
             </li>
@@ -21,6 +24,7 @@
     var mixin = require('mixin-class');
     var _ = require('lodash');
     var queryString = require('query-string');
+    var $ = require('jquery');
 
     var isPathInclude = function(parentPath, childPath) {
         return (parentPath + '/').indexOf(childPath + '/') !== -1
@@ -28,7 +32,7 @@
 
     var highlightActiveNavs = function(children, path) {
         children.forEach(function(child) {
-            if (isPathInclude(path, child.path)) {
+            if (isPathInclude(path, child.path())) {
                 child.active = true;
             }
             else {
@@ -40,7 +44,7 @@
             }
 
             if (child.children) {
-                highlightActiveNavs(child.children, path);
+                highlightActiveNavs(child.children(), path);
             }
         })
     };
@@ -48,7 +52,24 @@
     model = [
         function(navs, __path) {
             this.navs = _.cloneDeep(navs);
+            this.navs = this.navs.map(function(nav){
+                nav._expand = false;
+                return nav;
+            });
+            this.reset(this.navs);
             highlightActiveNavs(this.navs, '/' + __path);
+        },{
+            reset: function(data){
+                this.setData({
+                    navs: data
+                });
+            },
+            toggle: function($data, event){
+                debugger
+                $data._expand(!$data._expand());
+                // $(event.currentTarget.parentNode).find("ol").collapse('toggle');
+                return true;
+            }
         }
     ]
 </script>

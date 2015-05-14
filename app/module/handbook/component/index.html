@@ -106,13 +106,13 @@
  <div class="docs-section">
  	<h2>module layout</h2>
  	<p>在module每一层文件夹下面都一个添加一个<code>__layout.html</code>文件，该文件会作为对应目录的module layout文件。</p>
- 	<p>__layout文件内必须包含一个<code>{{content}}</code>字符串</p>
+ 	<p>__layout文件内必须包含一个<code>{{<span>content</span>}}</code>字符串</p>
  	<pre>
  	 	<code class="nt">&lt;div&gt;</code>
- 		<span>{{content}}</span>
+ 		<code><span>{{<span>content</span>}}</span></code>
  		<code class="nt">&lt;/div&gt;</code>
  	</pre>
- 	<p>在生成module的时候，{{content}}将会被替换成该目录下module的view</p>
+ 	<p>在生成module的时候，{{<span>content</span>}}将会被替换成该目录下module的view</p>
  	<p>__layout.html可以嵌套在多个目录下</p>
  </div>
  <div class="docs-section">
