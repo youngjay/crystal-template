@@ -53,7 +53,9 @@
         function(navs, __path) {
             this.navs = _.cloneDeep(navs);
             this.navs = this.navs.map(function(nav){
-                nav._expand = false;
+                nav._expand = nav.children && _.some(nav.children,function(child){
+                    return child.path.slice(1) == __path;
+                }) ? true : false;
                 return nav;
             });
             this.reset(this.navs);
@@ -65,9 +67,7 @@
                 });
             },
             toggle: function($data, event){
-                debugger
                 $data._expand(!$data._expand());
-                // $(event.currentTarget.parentNode).find("ol").collapse('toggle');
                 return true;
             }
         }
