@@ -79,10 +79,10 @@ gulp.task('build-jquery-vendors', function() {
     b.add('./vendor/bootstrap/js/bootstrap.js');
 
     // b.add('./vendor/autosize/jquery.autosize.js');
-    // b.add('./vendor/datepicker/js/bootstrap-datetimepicker.js');
+    b.add('./vendor/datepicker/js/bootstrap-datetimepicker.js');
     b.add('./vendor/datepicker/js/bootstrap-datepicker.js');
     b.add('./vendor/datepicker/js/locales/bootstrap-datepicker.zh-CN.js');
-    // b.add('./vendor/datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js');
+    b.add('./vendor/datepicker/js/locales/bootstrap-datetimepicker.zh-CN.js');
     
     b.add('./vendor/jquery.ui/jquery.ui.core.js');
     b.add('./vendor/jquery.ui/jquery.ui.widget.js');

@@ -1,0 +1,26 @@
+<!-- ko module: timePicker --><!-- /ko -->
+<script>
+	var TimePicker = require('module/control/time');
+	model = [
+		function(){
+			var self = this;
+			this.reset();
+			debugger
+			this.timePicker = new TimePicker(
+					{
+						component:{
+							placeholder: '00:00',
+							value:self.classTime
+						}
+					}
+				);
+		},{
+			reset: function(){
+				this.setData({
+					classTime: '11:11'
+				});
+			}
+		}
+	];
+
+</script>

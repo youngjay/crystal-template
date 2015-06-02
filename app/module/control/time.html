@@ -1,0 +1,29 @@
+<div style="display: inline-block">
+    <input class="apollo-form-control"
+           data-bind="event:event,attr: {placeholder: component.placeholder},datetimepicker: {
+    value: component.value,
+    format: 'HH:mm',
+    useCurrent:false,
+    useSeconds:false,
+    defaultDate:component.value(),
+    pickTime:true,
+    pickDate:false,
+    minuteStepping:15
+}, disable:$parent._readonly"
+            />
+</div>
+<script>
+
+    var ko = require('knockout');
+    var _ = require('lodash');
+
+    model = [
+        function(o){
+            debugger
+            _.assign(this,o);
+            this.config = {
+                readonly: false
+            };
+        }
+    ];
+</script>

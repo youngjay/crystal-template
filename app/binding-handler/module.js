@@ -3,7 +3,6 @@ var ko = require('knockout');
 
 module.exports = {
     'init': function(element, valueAccessor, ignored1, ignored2, bindingContext) {
-
         var componentViewModel = ko.utils.unwrapObservable(valueAccessor());    
 
         var template = componentViewModel['__view'];                

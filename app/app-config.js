@@ -159,6 +159,10 @@ module.exports = {
                         path: '/handbook/component/date'
                     },
                     {
+                        text: '时间控件',
+                        path: '/handbook/component/time'
+                    },
+                    {
                         text: 'validator',
                         path: '/handbook/service/validator'
                     },
